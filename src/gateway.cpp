@@ -106,11 +106,11 @@ bool Gateway::openSockets()
 int Gateway::run()
 {
     if (!openSockets())
-    {
         return 1;
-    }
 
-    if (!qos_.open("gateway_ingress"))
+    if (!qos_.open(
+            "gateway_ingress",
+            Config::HEARTBEAT_TIMEOUT_SECONDS))
     {
         return 1;
     }

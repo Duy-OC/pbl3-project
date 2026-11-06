@@ -3,9 +3,13 @@
 #include "network.h"
 #include "mavlink_codec.h"
 #include "time_utils.h"
+#include "sequence_tracker.h"
 
 #include <algorithm>
+#include <chrono>
 #include <cmath>
+#include <cstddef>
+#include <cstdint>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -16,17 +20,30 @@
 class QosRecorder
 {
 public:
-    bool open(const std::string &point)
+    bool open(
+        const std::string &point,
+        double offlineTimeoutSeconds = 3.0)
     {
+        if (!std::isfinite(offlineTimeoutSeconds) ||
+            offlineTimeoutSeconds <= 0.0)
+        {
+            std::cerr << "QOS: timeout khong hop le.\n";
+            return false;
+        }
+
+        offlineTimeoutSeconds_ = offlineTimeoutSeconds;
         point_ = point;
 
+        // Tao ten file rieng cho moi lan chay.
         auto stamp =
             std::chrono::duration_cast<std::chrono::milliseconds>(
                 std::chrono::system_clock::now().time_since_epoch())
                 .count();
 
         const std::string prefix =
-            "docs/ketqua/E0_" + point + "_" +
+            "docs/ketqua/E0_" +
+            point +
+            "_" +
             std::to_string(stamp);
 
         std::string base = prefix;
@@ -35,45 +52,65 @@ public:
         while (exists(base + ".csv") ||
                exists(base + "_msgid.csv"))
         {
-
-            base = prefix + "_" + std::to_string(++suffix);
+            base =
+                prefix +
+                "_" +
+                std::to_string(++suffix);
         }
 
         streamFile_.open((base + ".csv").c_str());
-        messageFile_.open((base + "_msgid.csv").c_str());
+
+        messageFile_.open(
+            (base + "_msgid.csv").c_str());
 
         if (!streamFile_ || !messageFile_)
         {
             std::cerr
-                << "QOS: khong mo duoc CSV. "
-                << "Tao docs/ketqua truoc.\n";
+                << "QOS: khong mo duoc CSV.\n"
+                << "Hay tao docs/ketqua va chay "
+                << "tu thu muc goc du an.\n";
 
             return false;
         }
 
+        // CSV tong hop theo nguon/sysid/compid.
         streamFile_
             << "t_s,point,source_ip,source_port,sysid,compid,"
             << "frames,frame_bytes,frames_per_s,frame_Bps,"
-            << "hb_count,hb_intervals,hb_mean_ms,"
-            << "hb_jitter_ms,max_silence_ms\n";
+            << "hb_count,hb_intervals,hb_mean_ms,hb_jitter_ms,"
+            << "max_silence_ms,"
+            << "seq_gap_estimate,seq_duplicates,seq_reordered,"
+            << "seq_resyncs,seq_uncertain_gaps,"
+            << "hb_online,offline_events,offline_time_s\n";
 
+        // CSV phan loai theo msgid.
         messageFile_
             << "t_s,point,source_ip,source_port,sysid,compid,"
-            << "msgid,frames,frame_bytes,frames_per_s,frame_Bps\n";
+            << "msgid,frames,frame_bytes,"
+            << "frames_per_s,frame_Bps\n";
 
-        streamFile_ << std::fixed << std::setprecision(3);
-        messageFile_ << std::fixed << std::setprecision(3);
+        streamFile_
+            << std::fixed
+            << std::setprecision(3);
+
+        messageFile_
+            << std::fixed
+            << std::setprecision(3);
 
         streamFile_.flush();
         messageFile_.flush();
 
         std::cout
             << "QOS CSV: " << base << ".csv\n"
-            << "QOS MSGID: " << base << "_msgid.csv\n";
+            << "QOS MSGID: " << base << "_msgid.csv\n"
+            << "QOS timeout: "
+            << offlineTimeoutSeconds_
+            << " giay\n";
 
         return true;
     }
 
+    // Goi mot lan cho moi frame MAVLink hop le.
     void onFrame(
         const mavlink_message_t &message,
         std::size_t frameBytes,
@@ -85,7 +122,7 @@ public:
             return;
         }
 
-        // Bat dau warm-up tu frame hop le dau tien.
+        // Warm-up bat dau tu frame hop le dau tien.
         if (!warmup_)
         {
             warmup_ = true;
@@ -105,19 +142,23 @@ public:
             }
 
             measuring_ = true;
-            start_ = lastWrite_ = now;
+            start_ = now;
+            lastWrite_ = now;
 
-            std::cout << "QOS: bat dau do 600 giay\n";
+            std::cout
+                << "QOS: bat dau do 600 giay\n";
         }
 
-        // Het khoang do thi khong dem them frame.
-        if (elapsedSeconds(now, start_) >= MEASURE_SECONDS)
+        // Khong dem frame ngoai cua so do.
+        if (elapsedSeconds(now, start_) >=
+            MEASURE_SECONDS)
         {
             tick(now);
             return;
         }
 
-        // Phan biet endpoint, sysid va compid.
+        updateOutages(now);
+
         Key key(
             source.sin_addr.s_addr,
             source.sin_port,
@@ -131,7 +172,29 @@ public:
         stream.sysid = message.sysid;
         stream.compid = message.compid;
 
-        // Khoang lang giua hai frame lien tiep.
+        // Neu boot time quay lui, dat moc sequence moi.
+        if (message.msgid == MAVLINK_MSG_ID_SYSTEM_TIME)
+        {
+            mavlink_system_time_t systemTime{};
+
+            mavlink_msg_system_time_decode(
+                &message,
+                &systemTime);
+
+            if (stream.hasBootTime &&
+                systemTime.time_boot_ms <
+                    stream.lastBootMs)
+            {
+                stream.sequence.restart();
+            }
+
+            stream.hasBootTime = true;
+            stream.lastBootMs = systemTime.time_boot_ms;
+        }
+
+        stream.sequence.observe(message.seq, now);
+
+        // Khoang lang giua cac frame cua cung nguon.
         if (stream.frames > 0)
         {
             stream.maxSilenceMs = std::max(
@@ -140,56 +203,77 @@ public:
         }
 
         stream.lastFrame = now;
+
         ++stream.frames;
         stream.bytes += frameBytes;
 
-        // Thong ke rieng theo MSGID.
+        // Thong ke rieng tung msgid.
         Count &count = stream.messages[message.msgid];
 
         ++count.frames;
         count.bytes += frameBytes;
 
-        // Chi do heartbeat cua autopilot.
-        if (message.msgid == MAVLINK_MSG_ID_HEARTBEAT)
+        if (message.msgid != MAVLINK_MSG_ID_HEARTBEAT)
         {
-            mavlink_heartbeat_t heartbeat{};
-
-            mavlink_msg_heartbeat_decode(
-                &message,
-                &heartbeat);
-
-            if (heartbeat.autopilot == MAV_AUTOPILOT_INVALID ||
-                heartbeat.type == MAV_TYPE_GCS)
-            {
-                return;
-            }
-
-            if (stream.heartbeats > 0)
-            {
-                double interval =
-                    elapsedSeconds(
-                        now,
-                        stream.lastHeartbeat) *
-                    1000.0;
-
-                // Welford: cap nhat trung binh va phuong sai.
-                ++stream.intervals;
-
-                double difference =
-                    interval - stream.meanMs;
-
-                stream.meanMs +=
-                    difference / stream.intervals;
-
-                stream.m2 +=
-                    difference * (interval - stream.meanMs);
-            }
-
-            ++stream.heartbeats;
-            stream.lastHeartbeat = now;
+            return;
         }
+
+        mavlink_heartbeat_t heartbeat{};
+
+        mavlink_msg_heartbeat_decode(
+            &message,
+            &heartbeat);
+
+        // Chi dung heartbeat autopilot de do online/offline.
+        if (heartbeat.autopilot == MAV_AUTOPILOT_INVALID ||
+            heartbeat.type == MAV_TYPE_GCS)
+        {
+            return;
+        }
+
+        // Heartbeat quay lai sau mot dot offline.
+        if (stream.offline)
+        {
+            stream.offlineSeconds += elapsedSeconds(
+                now,
+                stream.offlineSince);
+
+            stream.offline = false;
+
+            std::cout
+                << "QOS " << point_
+                << ": UAV " << stream.sysid
+                << " ONLINE tai t="
+                << elapsedSeconds(now, start_)
+                << " s\n";
+        }
+
+        // Welford: tinh mean va phuong sai khoang heartbeat.
+        if (stream.heartbeats > 0)
+        {
+            double intervalMs =
+                elapsedSeconds(
+                    now,
+                    stream.lastHeartbeat) *
+                1000.0;
+
+            ++stream.intervals;
+
+            double difference =
+                intervalMs - stream.meanMs;
+
+            stream.meanMs +=
+                difference / stream.intervals;
+
+            stream.m2 +=
+                difference * (intervalMs - stream.meanMs);
+        }
+
+        ++stream.heartbeats;
+        stream.lastHeartbeat = now;
     }
 
+    // Goi dinh ky, ke ca khi khong co frame den.
     void tick(TimePoint now = Clock::now())
     {
         if (!measuring_ || finished_)
@@ -198,10 +282,15 @@ public:
         }
 
         const TimePoint end =
-            start_ + std::chrono::seconds(MEASURE_SECONDS);
+            start_ +
+            std::chrono::seconds(MEASURE_SECONDS);
 
         bool complete = now >= end;
+
+        // Gioi han dong cuoi dung tai moc 600 giay.
         TimePoint sampleTime = complete ? end : now;
+
+        updateOutages(sampleTime);
 
         double window =
             elapsedSeconds(sampleTime, lastWrite_);
@@ -211,7 +300,7 @@ public:
             return;
         }
 
-        if (window > 0)
+        if (window > 0.0)
         {
             writeRows(sampleTime, window);
         }
@@ -265,15 +354,26 @@ private:
         TimePoint lastFrame{};
         TimePoint lastHeartbeat{};
 
-        double maxSilenceMs = 0;
+        double maxSilenceMs = 0.0;
 
         unsigned long long heartbeats = 0;
         unsigned long long intervals = 0;
 
-        double meanMs = 0;
-        double m2 = 0;
+        double meanMs = 0.0;
+        double m2 = 0.0;
 
         std::map<uint32_t, Count> messages;
+
+        SequenceTracker sequence;
+
+        bool hasBootTime = false;
+        uint32_t lastBootMs = 0;
+
+        bool offline = false;
+        TimePoint offlineSince{};
+
+        unsigned long long offlineEvents = 0;
+        double offlineSeconds = 0.0;
     };
 
     static bool exists(const std::string &path)
@@ -296,7 +396,55 @@ private:
             << static_cast<int>(stream.compid);
     }
 
-    void writeRows(TimePoint now, double window)
+    void updateOutages(TimePoint now)
+    {
+        for (auto &item : streams_)
+        {
+            Stream &stream = item.second;
+
+            // Chua tung co heartbeat thi chua bat dau
+            // theo doi outage cho nguon nay.
+            if (stream.heartbeats == 0 ||
+                stream.offline)
+            {
+                continue;
+            }
+
+            double silence = elapsedSeconds(
+                now,
+                stream.lastHeartbeat);
+
+            if (silence < offlineTimeoutSeconds_)
+            {
+                continue;
+            }
+
+            stream.offline = true;
+
+            // Tinh tu dung nguong timeout,
+            // khong tu thoi diem vong lap phat hien.
+            stream.offlineSince =
+                stream.lastHeartbeat +
+                std::chrono::duration_cast<Clock::duration>(
+                    std::chrono::duration<double>(
+                        offlineTimeoutSeconds_));
+
+            ++stream.offlineEvents;
+
+            std::cout
+                << "QOS " << point_
+                << ": UAV " << stream.sysid
+                << " OFFLINE tai t="
+                << elapsedSeconds(
+                       stream.offlineSince,
+                       start_)
+                << " s\n";
+        }
+    }
+
+    void writeRows(
+        TimePoint now,
+        double window)
     {
         double seconds = elapsedSeconds(now, start_);
 
@@ -311,21 +459,34 @@ private:
             // Tinh ca khoang im lang dang dien ra.
             stream.maxSilenceMs = std::max(
                 stream.maxSilenceMs,
-                elapsedSeconds(now, stream.lastFrame) * 1000.0);
+                elapsedSeconds(
+                    now,
+                    stream.lastFrame) *
+                    1000.0);
 
-            writePrefix(streamFile_, seconds, stream);
+            double frameRate =
+                (stream.frames - stream.previousFrames) /
+                window;
+
+            double byteRate =
+                (stream.bytes - stream.previousBytes) /
+                window;
+
+            writePrefix(
+                streamFile_,
+                seconds,
+                stream);
 
             streamFile_
                 << ',' << stream.frames
                 << ',' << stream.bytes
-                << ','
-                << (stream.frames - stream.previousFrames) / window
-                << ','
-                << (stream.bytes - stream.previousBytes) / window
+                << ',' << frameRate
+                << ',' << byteRate
                 << ',' << stream.heartbeats
                 << ',' << stream.intervals
                 << ',';
 
+            // Can it nhat mot khoang de tinh mean.
             if (stream.intervals > 0)
             {
                 streamFile_ << stream.meanMs;
@@ -333,36 +494,78 @@ private:
 
             streamFile_ << ',';
 
+            // Can it nhat hai khoang de tinh
+            // do lech chuan mau.
             if (stream.intervals > 1)
             {
                 double variance =
                     stream.m2 / (stream.intervals - 1);
 
-                streamFile_
-                    << std::sqrt(std::max(0.0, variance));
+                double jitter = std::sqrt(
+                    std::max(0.0, variance));
+
+                streamFile_ << jitter;
             }
 
             streamFile_
                 << ',' << stream.maxSilenceMs
+                << ',' << stream.sequence.gapEstimate()
+                << ',' << stream.sequence.duplicates
+                << ',' << stream.sequence.reordered
+                << ',' << stream.sequence.resyncs
+                << ',' << stream.sequence.uncertainGaps
+                << ',';
+
+            // De trong neu chua co heartbeat autopilot.
+            if (stream.heartbeats > 0)
+            {
+                streamFile_
+                    << (stream.offline ? 0 : 1);
+            }
+
+            double offlineTime =
+                stream.offlineSeconds;
+
+            // Cong them dot offline chua ket thuc.
+            if (stream.offline)
+            {
+                offlineTime += elapsedSeconds(
+                    now,
+                    stream.offlineSince);
+            }
+
+            streamFile_
+                << ',' << stream.offlineEvents
+                << ',' << offlineTime
                 << '\n';
 
             stream.previousFrames = stream.frames;
             stream.previousBytes = stream.bytes;
 
+            // Ghi tung loai thong diep.
             for (auto &entry : stream.messages)
             {
                 Count &count = entry.second;
 
-                writePrefix(messageFile_, seconds, stream);
+                double messageFrameRate =
+                    (count.frames - count.previousFrames) /
+                    window;
+
+                double messageByteRate =
+                    (count.bytes - count.previousBytes) /
+                    window;
+
+                writePrefix(
+                    messageFile_,
+                    seconds,
+                    stream);
 
                 messageFile_
                     << ',' << entry.first
                     << ',' << count.frames
                     << ',' << count.bytes
-                    << ','
-                    << (count.frames - count.previousFrames) / window
-                    << ','
-                    << (count.bytes - count.previousBytes) / window
+                    << ',' << messageFrameRate
+                    << ',' << messageByteRate
                     << '\n';
 
                 count.previousFrames = count.frames;
@@ -401,6 +604,8 @@ private:
     bool warmup_ = false;
     bool measuring_ = false;
     bool finished_ = false;
+
+    double offlineTimeoutSeconds_ = 3.0;
 
     TimePoint warmupStart_{};
     TimePoint start_{};
