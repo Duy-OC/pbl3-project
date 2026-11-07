@@ -1,6 +1,6 @@
 # Bảng msgid — Baseline E0 gốc
 
-Nguồn: `ketqua/E0_gateway_ingress_1793938099255_msgid.csv`. SYSID=1, COMPID=1; thời lượng đo 600 giây. Tần suất trung bình = tổng frame cuối / 600, byte rate trung bình = tổng byte frame cuối / 600. Đây không phải cột tốc độ cửa sổ cuối trong CSV.
+Nguồn: `../issue14/E0/E0_gateway_ingress_1793938099255_msgid.csv`. SYSID=1, COMPID=1; thời lượng đo 600 giây. Tần suất trung bình = tổng frame cuối / 600, byte rate trung bình = tổng byte frame cuối / 600. Đây không phải cột tốc độ cửa sổ cuối trong CSV.
 
 | MSGID | Tên | Frames | Byte frame | Trung bình Hz | Trung bình B/s |
 |---:|---|---:|---:|---:|---:|

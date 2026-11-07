@@ -11,7 +11,7 @@ Ngày sửa tài liệu: 07/11/2026. Đã sửa bảng Markdown bị vỡ trong 
 - SHA-256 RAR: `abc1f9f5e52e70d1014a53b5e64a4ce79cb14b7d6b6e4bf0206f86ae07ff6513`.
 - RAR là bản chụp đã nhận; các hash dưới đây nhận diện chính xác nội dung code/CSV trong bản đó.
 - Hồ sơ này không có nghĩa đã commit hoặc tạo tag trên máy Windows/GitHub. Sau khi commit theo hướng dẫn, tag sẽ nhận diện bản mã nguồn được stage.
-- Chưa có emulator.h; telemetry chưa chịu mô phỏng mất frame Markov.
+- Tại mốc E0 gốc chưa có emulator.h; telemetry của run E0 chưa chịu mô phỏng mất frame Markov. Issue 18 phát triển sau mốc này và không làm thay đổi dữ liệu E0.
 
 ## 2. Cấu hình xác nhận từ mã nguồn và CSV
 
@@ -35,7 +35,7 @@ Ngày sửa tài liệu: 07/11/2026. Đã sửa bảng Markdown bị vỡ trong 
 | Giới hạn nguồn UDP | 32 |
 | Dọn parser UDP không hoạt động | Sau 30 giây |
 | Bộ đo sequence | Cửa sổ 128 vị trí; resync sau khoảng im lặng >2 giây hoặc tình huống mơ hồ |
-| Markov | Chưa triển khai |
+| Markov trong run E0 | Chưa triển khai |
 
 ## 3. Thông tin người thực hiện cần bổ sung
 
@@ -90,10 +90,10 @@ Hash tính trên byte gốc trong RAR; đổi CRLF/LF cũng làm hash thay đổ
 | `src/tcpclient.cpp` | `a3d9bc2618e07dd585688c354abd6824dc9c66f95398928bd27756a2de9c2361` |
 | `src/time_utils.h` | `16c8aea7bcce027d1cd10a0501d014efe81b84c14fea07f2f36b5ae5223fa493` |
 | `src/uav_manager.h` | `3fc75084290f550e1e279bb8a3eb527ab574c6cd0c9c83f2d11cbec66e28a94b` |
-| `docs/ketqua/E0_client_rx_1793938128483.csv` | `0bf2dbca6dc3deb79f6ba620cc9d3b3cae9aea49e37561a86d54ce12f908d669` |
-| `docs/ketqua/E0_client_rx_1793938128483_msgid.csv` | `b5a43e7378cb251a51911bd742dd3ce7b8190c1183be3cd30077a460b42c6a8c` |
-| `docs/ketqua/E0_gateway_ingress_1793938099255.csv` | `85272b2f46468cc2f19cdf6cffefb3e3f2575cc86c2865919aa4822c6daf734f` |
-| `docs/ketqua/E0_gateway_ingress_1793938099255_msgid.csv` | `2b36a0087e0f12dd61b96f9394985012fc8a7b40b59108407565f2adc4465363` |
+| `docs/ketqua/issue14/E0/E0_client_rx_1793938128483.csv` | `0bf2dbca6dc3deb79f6ba620cc9d3b3cae9aea49e37561a86d54ce12f908d669` |
+| `docs/ketqua/issue14/E0/E0_client_rx_1793938128483_msgid.csv` | `b5a43e7378cb251a51911bd742dd3ce7b8190c1183be3cd30077a460b42c6a8c` |
+| `docs/ketqua/issue14/E0/E0_gateway_ingress_1793938099255.csv` | `85272b2f46468cc2f19cdf6cffefb3e3f2575cc86c2865919aa4822c6daf734f` |
+| `docs/ketqua/issue14/E0/E0_gateway_ingress_1793938099255_msgid.csv` | `2b36a0087e0f12dd61b96f9394985012fc8a7b40b59108407565f2adc4465363` |
 
 Thư viện MAVLink: 499 file thường, bỏ metadata Git. Hash cây theo thứ tự đường dẫn: `980643c2f23af41f55163d2342a5d21b4f1ba29647b7d2fb769c5545d66cba57`.
 Cách tính: với từng file theo đường dẫn tương đối được sắp xếp, nối UTF-8(path) + byte NUL + SHA-256 nhị phân của nội dung; SHA-256 toàn chuỗi.
@@ -107,14 +107,14 @@ Cách tính: với từng file theo đường dẫn tương đối được sắ
 
 ## 7. Lưu vào dự án Windows
 
-Đặt tài liệu này tại `docs/E0_BASELINE.md`. Giữ bốn CSV gốc trong `docs/ketqua/`.
+Đặt tài liệu này tại `docs/ketqua/issue15/E0_BASELINE.md`. Giữ bốn CSV gốc trong `docs/ketqua/issue14/E0/`.
 
 Tại thư mục gốc dự án, stage đúng phần cần lưu:
 
 ```cmd
-git add src docs/E0_BASELINE.md
-git add docs/ketqua/E0_gateway_ingress_1793938099255.csv docs/ketqua/E0_gateway_ingress_1793938099255_msgid.csv
-git add docs/ketqua/E0_client_rx_1793938128483.csv docs/ketqua/E0_client_rx_1793938128483_msgid.csv
+git add src docs/ketqua/issue15/E0_BASELINE.md
+git add docs/ketqua/issue14/E0/E0_gateway_ingress_1793938099255.csv docs/ketqua/issue14/E0/E0_gateway_ingress_1793938099255_msgid.csv
+git add docs/ketqua/issue14/E0/E0_client_rx_1793938128483.csv docs/ketqua/issue14/E0/E0_client_rx_1793938128483_msgid.csv
 git diff --cached --stat
 git diff --cached --name-only
 ```
@@ -138,6 +138,10 @@ Nếu `third_party/mavlink` là repo lồng/submodule và có thay đổi, commi
 - [x] Có bốn CSV E0 đủ 600 giây.
 - [x] Có cấu hình suy ra được từ code và hash nhận diện.
 - [ ] Người thực hiện bổ sung thông tin run còn thiếu ở mục 3.
-- [ ] Lưu tài liệu vào docs/E0_BASELINE.md trên Windows.
+- [ ] Lưu tài liệu vào docs/ketqua/issue15/E0_BASELINE.md trên Windows.
 - [ ] Commit và tạo tag local trên đúng repo đang làm việc.
 - [ ] Xác nhận trạng thái thư viện MAVLink để mốc Git có thể tái lập.
+
+## 9. Phân loại hồ sơ sau khi sắp xếp
+
+Bốn CSV ở `../issue14/E0/` là kết quả đo của issue 14. Tài liệu này và `bang_msgid.md` phục vụ chốt hồ sơ issue 15, dùng chung bộ CSV issue 14, không sao chép thành một run mới. Hash code/RAR và các mục chưa xác nhận trong hồ sơ gốc được giữ nguyên; gói docs hiện tại không chứa source/Git để xác minh lại. Log routing ở `../issue17/routing_recovery.log`; log client ở `../issue16/client_tests_gateway.log`. Việc sắp xếp tài liệu không xác nhận đã tạo tag Git.

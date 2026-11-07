@@ -13,7 +13,7 @@ Báo cáo được sửa từ client_tests.md và đối chiếu với client_te
 - Commit/code version của chính lần thử: chưa ghi nhận.
 - Ngày/giờ bắt đầu thực tế: chưa được nhập riêng. Tên CSV gateway chứa mốc thời gian hệ thống 1794011910944; không dùng nó thay hồ sơ thời gian nếu đồng hồ máy chưa được xác minh.
 - **Số client nền thực tế trong bài B/C/D là 3**, không phải 2 như mẫu hướng dẫn ban đầu. Có thể là QGC và hai console; mapping PID/ID chưa được ghi đầy đủ nên không khẳng định riêng từng ID là QGC hay console nào.
-- Log: client_tests_gateway.log. Đầu log mở CSV ingress 1794011910944.
+- Log: `./client_tests_gateway.log`. Đầu log mở CSV ingress 1794011910944.
 
 ## 2. A — Fan-out, đóng và kết nối lại console
 
@@ -104,3 +104,7 @@ Hai file của client 1794012053592 không bị hỏng: chỉ chưa chạy đủ
 **Có thể đóng issue 16 trong phạm vi các bài trên**, kèm log và bảng tài nguyên. Chưa coi đây là E4/E5/E6 đủ ma trận thí nghiệm, bài đo CPU phần trăm, kiểm chứng partial send bị ép hoặc chứng minh không rò rỉ trong mọi tải.
 
 **Không cần chạy lại chỉ để số client nền về 2.** Chỉ cần ghi đúng nền=3 như log. Có thể bổ sung timestamp sự kiện/thu số liệu phía client trong lần thử sau để bằng chứng mạnh hơn.
+
+## 9. Vị trí bằng chứng
+
+Toàn bộ tám CSV của bài client nằm trong `./`, cùng log `client_tests_gateway.log`. Tiền tố E0 trong tên được giữ nguyên để bảo toàn nhận diện run; các file này không phải baseline E0 của issue 14. Những kết luận dựa trên xác nhận quan sát của người thực hiện ở trên vẫn được ghi là xác nhận người thực hiện, không biến thành bằng chứng mới từ việc sắp xếp.
