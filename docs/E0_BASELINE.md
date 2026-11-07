@@ -1,6 +1,8 @@
 # PBL3 — Mốc E0: Gateway và QoS trước Markov
 
-Ngày lập hồ sơ: 06/11/2026.
+Ngày lập hồ sơ gốc: 06/11/2026.
+
+Ngày sửa tài liệu: 07/11/2026. Đã sửa bảng Markdown bị vỡ trong docs.rar; đối chiếu lại bốn CSV E0 gốc. Không thay số liệu CSV.
 
 ## 1. Nhận diện mốc
 
@@ -71,6 +73,8 @@ Không suy ra các mục này chỉ từ CSV:
 
 ## 5. Danh sách file và SHA-256
 
+Bốn hash CSV dưới đây đã được kiểm tra lại trực tiếp từ docs.rar và khớp hồ sơ gốc. Các hash mã nguồn/thư viện được giữ từ bản PBL3project(1).rar đã kiểm tra trước; docs.rar không chứa code để kiểm tra lại phiên bản hiện tại.
+
 Hash tính trên byte gốc trong RAR; đổi CRLF/LF cũng làm hash thay đổi.
 
 | File | SHA-256 |
@@ -94,7 +98,14 @@ Hash tính trên byte gốc trong RAR; đổi CRLF/LF cũng làm hash thay đổ
 Thư viện MAVLink: 499 file thường, bỏ metadata Git. Hash cây theo thứ tự đường dẫn: `980643c2f23af41f55163d2342a5d21b4f1ba29647b7d2fb769c5545d66cba57`.
 Cách tính: với từng file theo đường dẫn tương đối được sắp xếp, nối UTF-8(path) + byte NUL + SHA-256 nhị phân của nội dung; SHA-256 toàn chuỗi.
 
-## 6. Lưu vào dự án Windows
+## 6. Phân biệt baseline với các bài thử client
+
+- Chỉ bộ ingress `1793938099255` và client `1793938128483` trong mục 5 là baseline E0 đang được hồ sơ này mô tả.
+- Bộ ingress `1794011910944` và các client `1794011939330`, `1794012053592`, `1794012180678` thuộc lần thử client. Tiền tố E0 trong tên do code đặt cố định, không làm chúng trở thành baseline mới.
+- Không đưa CPU/RAM của bài reconnect 20 lần vào kết quả tài nguyên E0: đó là hai lần đo khác nhau.
+- routing_recovery.log là bài nhiều UAV/ngắt kết nối; client_tests_gateway.log là bài fan-out/client chậm/giới hạn kết nối. Giữ riêng hai log.
+
+## 7. Lưu vào dự án Windows
 
 Đặt tài liệu này tại `docs/E0_BASELINE.md`. Giữ bốn CSV gốc trong `docs/ketqua/`.
 
@@ -121,7 +132,7 @@ Không dùng -f để thay tag đã tồn tại. Không cần push để có m�
 
 Nếu `third_party/mavlink` là repo lồng/submodule và có thay đổi, commit cha không tự lưu nội dung sửa bên trong. Giữ RAR gốc làm bản đối chiếu; kiểm tra và lưu thay đổi thư viện riêng trước khi coi tag là bản tái lập hoàn chỉnh.
 
-## 7. Điều kiện hoàn tất mốc
+## 8. Điều kiện hoàn tất mốc
 
 - [x] Có bản RAR nguồn để đối chiếu.
 - [x] Có bốn CSV E0 đủ 600 giây.
