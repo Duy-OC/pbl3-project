@@ -1,0 +1,3 @@
+run_id,sysid,t_ms,event,state
+I16_02,1,0,INITIAL,G
+I16_02,1,610000,END,G

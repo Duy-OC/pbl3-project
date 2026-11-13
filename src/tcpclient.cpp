@@ -9,6 +9,10 @@
 
 int main()
 {
+    // Hien log ngay khi stdout/stderr duoc luu qua Tee-Object.
+    std::cout << std::unitbuf;
+    std::cerr << std::unitbuf;
+
     // 1. Khoi tao WinSock.
     Network::Runtime winsock;
 

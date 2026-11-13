@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <cstdint>
+#include <functional>
 #include <map>
 #include <random>
 #include <stdexcept>
@@ -104,11 +105,15 @@ namespace Markov
     class Channel
     {
     public:
+        using StateCallback = std::function<void(std::uint64_t, bool)>;
+
         Channel(
             const Config &config,
             int sysid,
-            std::uint64_t start_ms)
+            std::uint64_t start_ms,
+            StateCallback onState = StateCallback())
             : config_(config),
+              onState_(onState),
               last_ms_(start_ms),
               boundary_ms_(start_ms),
               badStart_ms_(start_ms)
@@ -144,6 +149,8 @@ namespace Markov
                 initialPartial_ = true;
                 stats_.initialPartialBadRuns = 1;
             }
+            if (onState_)
+                onState_(start_ms, bad_);
         }
 
         void tick(std::uint64_t now_ms)
@@ -189,12 +196,16 @@ namespace Markov
 
                         initialPartial_ = false;
                         bad_ = false;
+                        if (onState_)
+                            onState_(boundary_ms_, bad_);
                     }
                 }
                 else if (random < config_.pGB())
                 {
                     bad_ = true;
                     badStart_ms_ = boundary_ms_;
+                    if (onState_)
+                        onState_(boundary_ms_, bad_);
                 }
             }
         }
@@ -247,6 +258,7 @@ namespace Markov
         }
 
         Config config_;
+        StateCallback onState_;
         Stats stats_;
 
         std::mt19937 stateRng_;
@@ -263,10 +275,16 @@ namespace Markov
     class Emulator
     {
     public:
+        using StateCallback = std::function<void(int, std::uint64_t, bool)>;
         explicit Emulator(const Config &config)
             : config_(config)
         {
             config_.validate();
+        }
+
+        void setStateCallback(StateCallback callback)
+        {
+            onState_ = callback;
         }
 
         void addUav(int sysid, std::uint64_t start_ms)
@@ -274,7 +292,12 @@ namespace Markov
             if (channels_.find(sysid) == channels_.end())
             {
                 channels_.emplace(
-                    sysid, Channel(config_, sysid, start_ms));
+                    sysid, Channel(config_, sysid, start_ms,
+                        [this, sysid](std::uint64_t at, bool bad)
+                        {
+                            if (onState_)
+                                onState_(sysid, at, bad);
+                        }));
             }
         }
 
@@ -297,8 +320,14 @@ namespace Markov
             return channels_.at(sysid);
         }
 
+        const std::map<int, Channel> &channels() const
+        {
+            return channels_;
+        }
+
     private:
         Config config_;
+        StateCallback onState_;
         std::map<int, Channel> channels_;
     };
 

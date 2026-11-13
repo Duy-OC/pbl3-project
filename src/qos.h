@@ -20,9 +20,42 @@
 class QosRecorder
 {
 public:
+    void setSharedWindow(TimePoint start)
+    {
+        sharedWindow_ = true;
+
+        start_ = start;
+        lastWrite_ = start;
+
+        measuring_ = true;
+        finished_ = false;
+    }
+
+    bool inMeasurementWindow(TimePoint now) const
+    {
+        return measuring_ &&
+               now >= start_ &&
+               elapsedSeconds(now, start_) <
+                   MEASURE_SECONDS;
+    }
+
+    bool finished() const { return finished_; }
+
+    unsigned long long totalFrames(int sysid) const
+    {
+        unsigned long long total = 0;
+        for (const auto &entry : streams_)
+            if (entry.second.sysid == static_cast<uint32_t>(sysid))
+                total += entry.second.frames;
+        return total;
+    }
+
     bool open(
         const std::string &point,
-        double offlineTimeoutSeconds = 3.0)
+        double offlineTimeoutSeconds = 3.0,
+        const std::string &scenario = "E0",
+        const std::string &runId = "",
+        const std::string &outputDirectory = "docs/ketqua")
     {
         if (!std::isfinite(offlineTimeoutSeconds) ||
             offlineTimeoutSeconds <= 0.0)
@@ -40,11 +73,16 @@ public:
                 std::chrono::system_clock::now().time_since_epoch())
                 .count();
 
+        const std::string effectiveRunId =
+            runId.empty()
+                ? std::to_string(stamp)
+                : runId;
+
         const std::string prefix =
-            "docs/ketqua/E0_" +
-            point +
-            "_" +
-            std::to_string(stamp);
+            outputDirectory + "/" +
+            scenario + "_" +
+            effectiveRunId + "_" +
+            point;
 
         std::string base = prefix;
         unsigned int suffix = 0;
@@ -123,30 +161,43 @@ public:
         }
 
         // Warm-up bat dau tu frame hop le dau tien.
-        if (!warmup_)
+        if (sharedWindow_)
         {
-            warmup_ = true;
-            warmupStart_ = now;
-
-            std::cout
-                << "QOS: warm-up 10 giay "
-                << "tu frame hop le dau tien\n";
-        }
-
-        if (!measuring_)
-        {
-            if (elapsedSeconds(now, warmupStart_) <
-                WARMUP_SECONDS)
+            // Hai recorder cung doi den mot moc bat dau.
+            if (now < start_)
             {
                 return;
             }
+        }
+        else
+        {
+            // Giu cach cu cho console client:
+            // warm-up tu frame hop le dau tien.
+            if (!warmup_)
+            {
+                warmup_ = true;
+                warmupStart_ = now;
 
-            measuring_ = true;
-            start_ = now;
-            lastWrite_ = now;
+                std::cout
+                    << "QOS: warm-up 10 giay "
+                    << "tu frame hop le dau tien\n";
+            }
 
-            std::cout
-                << "QOS: bat dau do 600 giay\n";
+            if (!measuring_)
+            {
+                if (elapsedSeconds(now, warmupStart_) <
+                    WARMUP_SECONDS)
+                {
+                    return;
+                }
+
+                measuring_ = true;
+                start_ = now;
+                lastWrite_ = now;
+
+                std::cout
+                    << "QOS: bat dau do 600 giay\n";
+            }
         }
 
         // Khong dem frame ngoai cua so do.
@@ -276,7 +327,7 @@ public:
     // Goi dinh ky, ke ca khi khong co frame den.
     void tick(TimePoint now = Clock::now())
     {
-        if (!measuring_ || finished_)
+        if (!measuring_ || finished_ || now < start_)
         {
             return;
         }
@@ -604,6 +655,8 @@ private:
     bool warmup_ = false;
     bool measuring_ = false;
     bool finished_ = false;
+
+    bool sharedWindow_ = false;
 
     double offlineTimeoutSeconds_ = 3.0;
 

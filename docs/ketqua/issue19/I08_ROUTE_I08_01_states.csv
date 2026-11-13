@@ -1,0 +1,3 @@
+run_id,sysid,t_ms,event,state
+I08_01,1,0,INITIAL,G
+I08_01,2,21,INITIAL,G

@@ -1,0 +1,14 @@
+scenario=I17_CANCEL_CLIENT
+run_id=I17_01
+urb=0
+dur_s=2
+slot_ms=100
+lossgood=0
+lossbad=1
+seed=1
+test_hold_udp_ms=10000
+warmup_s=10
+measure_s=600
+route_timeout_s=5
+ingress_timeout_s=5
+egress_timeout_s=3

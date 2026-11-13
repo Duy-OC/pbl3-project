@@ -1,0 +1,5 @@
+t_s,point,source_ip,source_port,sysid,compid,frames,frame_bytes,frames_per_s,frame_Bps,hb_count,hb_intervals,hb_mean_ms,hb_jitter_ms,max_silence_ms,seq_gap_estimate,seq_duplicates,seq_reordered,seq_resyncs,seq_uncertain_gaps,hb_online,offline_events,offline_time_s
+5.035,gateway_ingress,172.26.162.42,14600,1,1,270,10969,53.625,2178.552,4,3,1090.930,414.849,633.019,0,0,0,0,0,1,0,0.000
+10.053,gateway_ingress,172.26.162.42,14600,1,1,559,22640,57.598,2326.045,9,8,1091.516,221.757,633.019,0,0,0,0,0,1,0,0.000
+15.070,gateway_ingress,172.26.162.42,14600,1,1,846,34184,57.202,2300.829,14,13,1091.316,169.370,633.019,0,0,0,0,0,1,0,0.000
+20.088,gateway_ingress,172.26.162.42,14600,1,1,1116,45131,53.801,2181.332,18,17,1091.167,146.679,633.019,0,0,0,0,0,1,0,0.000

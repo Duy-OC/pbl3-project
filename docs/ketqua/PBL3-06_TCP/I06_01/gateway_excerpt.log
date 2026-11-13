@@ -1,0 +1,61 @@
+Nguon: doan terminal nguoi do da gui; day la excerpt, khong phai full log cua run.
+
+=== STATS ===
+UAV online=1 | UAV da hoc=1 | Clients=1
+UDP RX datagrams=7740 | UDP RX bytes=314032
+MAVLink UAV RX=7740 | Client RX=155
+CRC errors=0 (UDP=0, TCP=0) | Signature errors=0
+TCP TX bytes=230053 | UDP TX frames=155
+UDP queued=0 | UDP dropped/cancelled=0
+Blocked messages=0 (no route=0, unknown metadata=0) | Slow clients=0
+UDP RX rate=2652.44 B/s | MAVLink UAV RX rate=64.2993 frames/s
+  UAV 1: ONLINE | RX frames=7728
+=============
+
+QOS: t=120.432 s | frames=7148
+QOS: t=120.432 s | frames=7148
+
+=== STATS ===
+UAV online=1 | UAV da hoc=1 | Clients=1
+UDP RX datagrams=8062 | UDP RX bytes=327308
+MAVLink UAV RX=8062 | Client RX=161
+CRC errors=0 (UDP=0, TCP=0) | Signature errors=0
+TCP TX bytes=243329 | UDP TX frames=161
+UDP queued=0 | UDP dropped/cancelled=0
+Blocked messages=0 (no route=0, unknown metadata=0) | Slow clients=0
+UDP RX rate=2649.03 B/s | MAVLink UAV RX rate=64.2505 frames/s
+  UAV 1: ONLINE | RX frames=8050
+=============
+
+QOS: t=125.445 s | frames=7471
+QOS: t=125.445 s | frames=7471
+
+=== STATS ===
+UAV online=1 | UAV da hoc=1 | Clients=1
+UDP RX datagrams=8358 | UDP RX bytes=339180
+MAVLink UAV RX=8358 | Client RX=166
+CRC errors=0 (UDP=0, TCP=0) | Signature errors=0
+TCP TX bytes=255201 | UDP TX frames=166
+UDP queued=0 | UDP dropped/cancelled=0
+Blocked messages=0 (no route=0, unknown metadata=0) | Slow clients=0
+UDP RX rate=2357.46 B/s | MAVLink UAV RX rate=58.7776 frames/s
+  UAV 1: ONLINE | RX frames=8346
+=============
+
+QOS: t=130.469 s | frames=7766
+QOS: t=130.469 s | frames=7766
+
+=== STATS ===
+UAV online=1 | UAV da hoc=1 | Clients=1
+UDP RX datagrams=8630 | UDP RX bytes=350218
+MAVLink UAV RX=8630 | Client RX=172
+CRC errors=0 (UDP=0, TCP=0) | Signature errors=0
+TCP TX bytes=266239 | UDP TX frames=172
+UDP queued=0 | UDP dropped/cancelled=0
+Blocked messages=0 (no route=0, unknown metadata=0) | Slow clients=0
+UDP RX rate=2199.68 B/s | MAVLink UAV RX rate=54.2047 frames/s
+  UAV 1: ONLINE | RX frames=8618
+=============
+
+QOS: t=135.488 s | frames=8036
+QOS: t=135.488 s | frames=8036
