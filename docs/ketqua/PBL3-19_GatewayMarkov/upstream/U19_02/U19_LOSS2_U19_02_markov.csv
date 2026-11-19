@@ -1,0 +1,2 @@
+run_id,sysid,frames_in,frames_kept,frames_dropped_emu,ingress_qos_frames,egress_qos_frames,run_slots,run_bad_slots,run_bad_fraction,measurement_drop_fraction,run_complete_bad_runs,run_mean_bad_s,run_initial_partial_bad_runs,run_final_open_bad_run
+U19_02,1,15943,15943,0,15943,15943,6100,0,0,0,0,0,0,0

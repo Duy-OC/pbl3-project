@@ -1,0 +1,203 @@
+QOS CSV: docs/ketqua/K2/20261114_174401_r1/K2_20261114_174401_r1_proxy_pre.csv
+QOS MSGID: docs/ketqua/K2/20261114_174401_r1/K2_20261114_174401_r1_proxy_pre_msgid.csv
+QOS timeout: 3 giay
+QOS CSV: docs/ketqua/K2/20261114_174401_r1/K2_20261114_174401_r1_proxy_post.csv
+QOS MSGID: docs/ketqua/K2/20261114_174401_r1/K2_20261114_174401_r1_proxy_post_msgid.csv
+QOS timeout: 3 giay
+UPSTREAM PROXY: PX4 -> Windows UDP 14550 -> Markov -> Gateway 127.0.0.1:14551 from 127.0.0.1:14610 | sysid=1 urb=0.05 dur_s=2 slot_ms=100 seed=1001
+REVERSE MARKOV: Gateway -> PX4 urb=0.05 dur_s=2 slot_ms=100 seed=2654435920
+PX4 SOURCE: 172.26.162.42:14600
+PROXY WINDOW: warmup_s=5 measure_s=120 run_id=20261114_174401_r1
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+PROXY STATS: pre=0 kept=0 dropped_markov=0 post_sent=0 send_errors=0 reverse_rx=5 reverse_dropped=0 reverse_tx=5 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=5.00684 s | frames=250
+QOS: t=5.00684 s | frames=234
+PROXY STATS: pre=250 kept=234 dropped_markov=16 post_sent=234 send_errors=0 reverse_rx=10 reverse_dropped=0 reverse_tx=10 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=10.0219 s | frames=510
+QOS: t=10.0219 s | frames=480
+PROXY STATS: pre=510 kept=480 dropped_markov=30 post_sent=480 send_errors=0 reverse_rx=14 reverse_dropped=1 reverse_tx=13 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=15.0917 s | frames=759
+QOS: t=15.0917 s | frames=715
+PROXY STATS: pre=759 kept=715 dropped_markov=44 post_sent=715 send_errors=0 reverse_rx=19 reverse_dropped=1 reverse_tx=18 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=20.1277 s | frames=1027
+QOS: t=20.1277 s | frames=977
+PROXY STATS: pre=1027 kept=977 dropped_markov=50 post_sent=977 send_errors=0 reverse_rx=24 reverse_dropped=1 reverse_tx=23 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=25.1624 s | frames=1289
+QOS: t=25.1624 s | frames=1217
+PROXY STATS: pre=1289 kept=1217 dropped_markov=72 post_sent=1217 send_errors=0 reverse_rx=29 reverse_dropped=1 reverse_tx=28 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=30.1793 s | frames=1536
+QOS: t=30.1793 s | frames=1451
+PROXY STATS: pre=1536 kept=1451 dropped_markov=85 post_sent=1451 send_errors=0 reverse_rx=34 reverse_dropped=1 reverse_tx=33 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=35.2385 s | frames=1803
+QOS: t=35.2385 s | frames=1714
+PROXY STATS: pre=1803 kept=1714 dropped_markov=89 post_sent=1714 send_errors=0 reverse_rx=39 reverse_dropped=1 reverse_tx=38 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=40.2637 s | frames=2050
+QOS: t=40.2637 s | frames=1929
+PROXY STATS: pre=2050 kept=1929 dropped_markov=121 post_sent=1929 send_errors=0 reverse_rx=44 reverse_dropped=1 reverse_tx=43 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=45.2722 s | frames=2314
+QOS: t=45.2722 s | frames=2176
+PROXY STATS: pre=2314 kept=2176 dropped_markov=138 post_sent=2176 send_errors=0 reverse_rx=49 reverse_dropped=3 reverse_tx=46 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS proxy_post: UAV 1 OFFLINE tai t=46.5789 s
+QOS proxy_post: UAV 1 ONLINE tai t=47.8984 s
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=50.3075 s | frames=2581
+QOS: t=50.3075 s | frames=2430
+PROXY STATS: pre=2581 kept=2430 dropped_markov=151 post_sent=2430 send_errors=0 reverse_rx=52 reverse_dropped=3 reverse_tx=49 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=55.3427 s | frames=2828
+QOS: t=55.3427 s | frames=2673
+PROXY STATS: pre=2828 kept=2673 dropped_markov=155 post_sent=2673 send_errors=0 reverse_rx=57 reverse_dropped=3 reverse_tx=54 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=60.3466 s | frames=3090
+QOS: t=60.3466 s | frames=2935
+PROXY STATS: pre=3090 kept=2935 dropped_markov=155 post_sent=2935 send_errors=0 reverse_rx=62 reverse_dropped=3 reverse_tx=59 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=65.3829 s | frames=3335
+QOS: t=65.3829 s | frames=3148
+PROXY STATS: pre=3335 kept=3148 dropped_markov=187 post_sent=3148 send_errors=0 reverse_rx=67 reverse_dropped=3 reverse_tx=64 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=70.4197 s | frames=3604
+QOS: t=70.4197 s | frames=3413
+PROXY STATS: pre=3604 kept=3413 dropped_markov=191 post_sent=3413 send_errors=0 reverse_rx=72 reverse_dropped=3 reverse_tx=69 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=75.4461 s | frames=3864
+QOS: t=75.4461 s | frames=3666
+PROXY STATS: pre=3864 kept=3666 dropped_markov=198 post_sent=3666 send_errors=0 reverse_rx=77 reverse_dropped=3 reverse_tx=74 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=80.4734 s | frames=4115
+QOS: t=80.4734 s | frames=3913
+PROXY STATS: pre=4115 kept=3913 dropped_markov=202 post_sent=3913 send_errors=0 reverse_rx=82 reverse_dropped=3 reverse_tx=79 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=85.4738 s | frames=4379
+QOS: t=85.4738 s | frames=4169
+PROXY STATS: pre=4379 kept=4169 dropped_markov=210 post_sent=4169 send_errors=0 reverse_rx=86 reverse_dropped=3 reverse_tx=83 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=90.5096 s | frames=4628
+QOS: t=90.5096 s | frames=4397
+PROXY STATS: pre=4628 kept=4397 dropped_markov=231 post_sent=4397 send_errors=0 reverse_rx=91 reverse_dropped=3 reverse_tx=88 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=95.5436 s | frames=4890
+QOS: t=95.5436 s | frames=4652
+PROXY STATS: pre=4890 kept=4652 dropped_markov=238 post_sent=4652 send_errors=0 reverse_rx=96 reverse_dropped=5 reverse_tx=91 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=100.579 s | frames=5158
+QOS: t=100.579 s | frames=4914
+PROXY STATS: pre=5158 kept=4914 dropped_markov=244 post_sent=4914 send_errors=0 reverse_rx=101 reverse_dropped=5 reverse_tx=96 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=105.595 s | frames=5404
+QOS: t=105.595 s | frames=5159
+PROXY STATS: pre=5404 kept=5159 dropped_markov=245 post_sent=5159 send_errors=0 reverse_rx=106 reverse_dropped=5 reverse_tx=101 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=110.61 s | frames=5669
+QOS: t=110.61 s | frames=5419
+PROXY STATS: pre=5669 kept=5419 dropped_markov=250 post_sent=5419 send_errors=0 reverse_rx=111 reverse_dropped=5 reverse_tx=106 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=115.653 s | frames=5942
+QOS: t=115.653 s | frames=5685
+PROXY STATS: pre=5942 kept=5685 dropped_markov=257 post_sent=5685 send_errors=0 reverse_rx=116 reverse_dropped=6 reverse_tx=110 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21
+QOS: t=120 s | frames=6164
+QOS: da ket thuc 120 giay; Gateway/client van tiep tuc chay
+QOS: t=120 s | frames=5901
+QOS: da ket thuc 120 giay; Gateway/client van tiep tuc chay
+UPSTREAM RESULT: pre=6164 pre_good=5901 pre_bad=263 kept=5901 dropped_markov=263 dropped_good=0 dropped_bad=263 post_sent=5901 send_errors=0 reverse_pre=115 reverse_dropped=6 reverse_post=109 slots_including_warmup=6435 summary=docs/ketqua/K2/20261114_174401_r1/K2_20261114_174401_r1_summary.csv
+PROXY STATS: pre=6164 kept=5901 dropped_markov=263 post_sent=5901 send_errors=0 reverse_rx=120 reverse_dropped=6 reverse_tx=114 crc_errors=0
+REVERSE: Gateway -> PX4 172.26.162.42:14600 bytes=21

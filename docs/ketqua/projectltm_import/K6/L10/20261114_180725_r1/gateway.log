@@ -1,0 +1,247 @@
+QOS CSV: docs/ketqua/K6/L10/20261114_180725_r1/K6_20261114_180725_r1_gateway_ingress.csv
+QOS MSGID: docs/ketqua/K6/L10/20261114_180725_r1/K6_20261114_180725_r1_gateway_ingress_msgid.csv
+QOS timeout: 3 giay
+=== PBL3 GATEWAY: ROUTER & QOS ===
+UDP Ingress: 0.0.0.0:14651
+TCP Egress:  127.0.0.1:5760
+Heartbeat timeout: 3 giay
+Warm-up: 5 giay | Thoi gian do: 60 giay
+Scenario: K6 | Run ID: 20261114_180725_r1
+
+UAV 1 ONLINE tai 127.0.0.1:14660
+QOS: warm-up 5 giay tu frame hop le dau tien
+Client #1 CONNECTED | Tong=1
+
+=== STATS ===
+UAV online=1 | UAV da hoc=1 | Clients=1
+UDP RX datagrams=7 | UDP RX bytes=119
+MAVLink UAV RX=7 | Client RX=0
+CRC errors=0 (UDP=0, TCP=0) | Signature errors=0
+TCP TX bytes=452 | UDP TX frames=4
+UDP queued=0 | UDP dropped/cancelled=0
+Blocked messages=0 (no route=0, unknown metadata=0) | Slow clients=0
+UDP RX rate=23.1108 B/s | MAVLink UAV RX rate=1.35946 frames/s
+  UAV 1: ONLINE | RX frames=7
+=============
+
+QOS: bat dau do 60 giay
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+
+=== STATS ===
+UAV online=1 | UAV da hoc=1 | Clients=1
+UDP RX datagrams=18 | UDP RX bytes=282
+MAVLink UAV RX=18 | Client RX=0
+CRC errors=0 (UDP=0, TCP=0) | Signature errors=0
+TCP TX bytes=612 | UDP TX frames=15
+UDP queued=0 | UDP dropped/cancelled=0
+Blocked messages=0 (no route=0, unknown metadata=0) | Slow clients=0
+UDP RX rate=32.2316 B/s | MAVLink UAV RX rate=2.17514 frames/s
+  UAV 1: ONLINE | RX frames=18
+=============
+
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+QOS: t=5.19955 s | frames=14
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+
+=== STATS ===
+UAV online=1 | UAV da hoc=1 | Clients=1
+UDP RX datagrams=35 | UDP RX bytes=523
+MAVLink UAV RX=35 | Client RX=0
+CRC errors=0 (UDP=0, TCP=0) | Signature errors=0
+TCP TX bytes=932 | UDP TX frames=28
+UDP queued=0 | UDP dropped/cancelled=0
+Blocked messages=0 (no route=0, unknown metadata=0) | Slow clients=0
+UDP RX rate=46.4283 B/s | MAVLink UAV RX rate=3.27503 frames/s
+  UAV 1: ONLINE | RX frames=35
+=============
+
+QOS: t=10.2574 s | frames=29
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+
+=== STATS ===
+UAV online=1 | UAV da hoc=1 | Clients=1
+UDP RX datagrams=50 | UDP RX bytes=742
+MAVLink UAV RX=50 | Client RX=0
+CRC errors=0 (UDP=0, TCP=0) | Signature errors=0
+TCP TX bytes=1172 | UDP TX frames=39
+UDP queued=0 | UDP dropped/cancelled=0
+Blocked messages=0 (no route=0, unknown metadata=0) | Slow clients=0
+UDP RX rate=43.5424 B/s | MAVLink UAV RX rate=2.98235 frames/s
+  UAV 1: ONLINE | RX frames=50
+=============
+
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+QOS: t=15.4 s | frames=46
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+
+=== STATS ===
+UAV online=1 | UAV da hoc=1 | Clients=1
+UDP RX datagrams=67 | UDP RX bytes=983
+MAVLink UAV RX=67 | Client RX=0
+CRC errors=0 (UDP=0, TCP=0) | Signature errors=0
+TCP TX bytes=1492 | UDP TX frames=52
+UDP queued=0 | UDP dropped/cancelled=0
+Blocked messages=0 (no route=0, unknown metadata=0) | Slow clients=0
+UDP RX rate=46.4667 B/s | MAVLink UAV RX rate=3.27773 frames/s
+  UAV 1: ONLINE | RX frames=67
+=============
+
+ACK UAV 1 | command=400 | result=0
+QOS: t=20.4028 s | frames=62
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+
+=== STATS ===
+UAV online=1 | UAV da hoc=1 | Clients=1
+UDP RX datagrams=82 | UDP RX bytes=1202
+MAVLink UAV RX=82 | Client RX=0
+CRC errors=0 (UDP=0, TCP=0) | Signature errors=0
+TCP TX bytes=1757 | UDP TX frames=64
+UDP queued=0 | UDP dropped/cancelled=0
+Blocked messages=0 (no route=0, unknown metadata=0) | Slow clients=0
+UDP RX rate=42.8922 B/s | MAVLink UAV RX rate=2.93782 frames/s
+  UAV 1: ONLINE | RX frames=82
+=============
+
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+QOS: t=25.5688 s | frames=77
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+
+=== STATS ===
+UAV online=1 | UAV da hoc=1 | Clients=1
+UDP RX datagrams=99 | UDP RX bytes=1443
+MAVLink UAV RX=99 | Client RX=0
+CRC errors=0 (UDP=0, TCP=0) | Signature errors=0
+TCP TX bytes=2052 | UDP TX frames=76
+UDP queued=0 | UDP dropped/cancelled=0
+Blocked messages=0 (no route=0, unknown metadata=0) | Slow clients=0
+UDP RX rate=46.7166 B/s | MAVLink UAV RX rate=3.29536 frames/s
+  UAV 1: ONLINE | RX frames=99
+=============
+
+ACK UAV 1 | command=400 | result=0
+QOS: t=30.6835 s | frames=93
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+
+=== STATS ===
+UAV online=1 | UAV da hoc=1 | Clients=1
+UDP RX datagrams=114 | UDP RX bytes=1656
+MAVLink UAV RX=114 | Client RX=0
+CRC errors=0 (UDP=0, TCP=0) | Signature errors=0
+TCP TX bytes=2332 | UDP TX frames=87
+UDP queued=1 | UDP dropped/cancelled=0
+Blocked messages=0 (no route=0, unknown metadata=0) | Slow clients=0
+UDP RX rate=42.4273 B/s | MAVLink UAV RX rate=2.98784 frames/s
+  UAV 1: ONLINE | RX frames=114
+=============
+
+ACK UAV 1 | command=400 | result=0
+QOS: t=35.7992 s | frames=109
+ACK UAV 1 | command=400 | result=0
+ACK UAV 1 | command=400 | result=0
+
+=== STATS ===
+UAV online=1 | UAV da hoc=1 | Clients=1
+UDP RX datagrams=127 | UDP RX bytes=1859
+MAVLink UAV RX=127 | Client RX=0
+CRC errors=0 (UDP=0, TCP=0) | Signature errors=0
+TCP TX bytes=2452 | UDP TX frames=97
+UDP queued=0 | UDP dropped/cancelled=0
+Blocked messages=0 (no route=0, unknown metadata=0) | Slow clients=0
+UDP RX rate=40.1591 B/s | MAVLink UAV RX rate=2.57177 frames/s
+  UAV 1: ONLINE | RX frames=127
+=============
+
+QOS: t=40.8062 s | frames=120
+
+=== STATS ===
+UAV online=1 | UAV da hoc=1 | Clients=1
+UDP RX datagrams=136 | UDP RX bytes=2012
+MAVLink UAV RX=136 | Client RX=0
+CRC errors=0 (UDP=0, TCP=0) | Signature errors=0
+TCP TX bytes=2452 | UDP TX frames=102
+UDP queued=0 | UDP dropped/cancelled=0
+Blocked messages=0 (no route=0, unknown metadata=0) | Slow clients=0
+UDP RX rate=30.0066 B/s | MAVLink UAV RX rate=1.7651 frames/s
+  UAV 1: ONLINE | RX frames=136
+=============
+
+QOS: t=45.9613 s | frames=130
+
+=== STATS ===
+UAV online=1 | UAV da hoc=1 | Clients=1
+UDP RX datagrams=146 | UDP RX bytes=2182
+MAVLink UAV RX=146 | Client RX=0
+CRC errors=0 (UDP=0, TCP=0) | Signature errors=0
+TCP TX bytes=2452 | UDP TX frames=107
+UDP queued=0 | UDP dropped/cancelled=0
+Blocked messages=0 (no route=0, unknown metadata=0) | Slow clients=0
+UDP RX rate=32.9536 B/s | MAVLink UAV RX rate=1.93845 frames/s
+  UAV 1: ONLINE | RX frames=146
+=============
+
+QOS: t=51.0641 s | frames=140
+
+=== STATS ===
+UAV online=1 | UAV da hoc=1 | Clients=1
+UDP RX datagrams=156 | UDP RX bytes=2352
+MAVLink UAV RX=156 | Client RX=0
+CRC errors=0 (UDP=0, TCP=0) | Signature errors=0
+TCP TX bytes=2452 | UDP TX frames=112
+UDP queued=0 | UDP dropped/cancelled=0
+Blocked messages=0 (no route=0, unknown metadata=0) | Slow clients=0
+UDP RX rate=33.4562 B/s | MAVLink UAV RX rate=1.96801 frames/s
+  UAV 1: ONLINE | RX frames=156
+=============
+
+QOS: t=56.1392 s | frames=149
+QOS: t=60 s | frames=157
+QOS: da ket thuc 60 giay; Gateway/client van tiep tuc chay
+
+=== STATS ===
+UAV online=1 | UAV da hoc=1 | Clients=1
+UDP RX datagrams=165 | UDP RX bytes=2505
+MAVLink UAV RX=165 | Client RX=0
+CRC errors=0 (UDP=0, TCP=0) | Signature errors=0
+TCP TX bytes=2452 | UDP TX frames=116
+UDP queued=1 | UDP dropped/cancelled=0
+Blocked messages=0 (no route=0, unknown metadata=0) | Slow clients=0
+UDP RX rate=30.4901 B/s | MAVLink UAV RX rate=1.79353 frames/s
+  UAV 1: ONLINE | RX frames=165
+=============
+
+Client #1 DISCONNECTED | TCP TX=2452 bytes

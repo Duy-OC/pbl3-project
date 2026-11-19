@@ -1,5 +1,5 @@
 // PBL3-04: kiem parser MAVLink voi frame chia/gop, chi in ket qua ra console.
-#include "../src/mavlink_codec.h"
+#include "../src/common/mavlink_codec.h"
 
 #include <cstddef>
 #include <cstdint>

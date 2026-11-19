@@ -1,5 +1,5 @@
 // PBL3-02: kiem tra WinSock UDP tren loopback, khong tao file ket qua.
-#include "../src/network.h"
+#include "../src/common/network.h"
 
 #include <cstring>
 #include <iostream>

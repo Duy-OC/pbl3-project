@@ -1,0 +1,12 @@
+scenario,expected,actual,result
+continuous,0,0,PASS
+one_missing,1,1,PASS
+five_missing,5,5,PASS
+wrap_255_0,0,0,PASS
+late_reorder_clears_gap,0,0,PASS
+late_reorder_counter,1,1,PASS
+duplicate_counter,1,1,PASS
+restart_resync,1,1,PASS
+restart_uncertain,29,29,PASS
+silence_resync,1,1,PASS
+silence_no_false_gap,0,0,PASS

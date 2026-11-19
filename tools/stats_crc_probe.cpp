@@ -1,5 +1,5 @@
-#include "../src/network.h"
-#include "../src/mavlink_codec.h"
+#include "../src/common/network.h"
+#include "../src/common/mavlink_codec.h"
 
 #include <iostream>
 #include <string>

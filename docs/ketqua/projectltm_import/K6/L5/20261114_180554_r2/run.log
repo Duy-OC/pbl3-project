@@ -1,0 +1,7 @@
+start=2026-11-14T18:05:54.013692
+fake_uav=true
+commands=50
+gateway=C:\Users\User\OneDrive - The University of Technology\Desktop\test\bin\gateway.exe --scenario K6 --run-id 20261114_180554_r2 --output-dir docs/ketqua/K6/L5/20261114_180554_r2 --udp-port 14651 --measure-seconds 60
+proxy=C:\Users\User\OneDrive - The University of Technology\Desktop\test\bin\upstream_markov_proxy.exe --scenario K6 --run-id 20261114_180554_r2 --output-dir docs/ketqua/K6/L5/20261114_180554_r2 --listen-port 14650 --gateway-port 14651 --gateway-source-port 14660 --measure-seconds 60 --seed 6002 --urb 0.05 --burst-packets 4 --lossgood 0 --lossbad 1
+end=2026-11-14T18:07:03.096878
+status=PASS

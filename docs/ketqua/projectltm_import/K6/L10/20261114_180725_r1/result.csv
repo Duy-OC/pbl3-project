@@ -1,0 +1,2 @@
+loss_set_pct,run_id,commands,pending,acked,success_pct,attempts,retries,retry_mean_per_command,reverse_pre,reverse_dropped,reverse_loss_pct,fake_uav_commands_received,fake_uav_acks_sent
+10.0,20261114_180725_r1,50,50,50,100.0,56,6,0.12,111,4,3.604,53,53

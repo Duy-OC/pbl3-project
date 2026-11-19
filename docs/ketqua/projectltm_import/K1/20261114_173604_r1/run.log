@@ -1,0 +1,5 @@
+start=2026-11-14T17:36:04.847065
+gateway=C:\Users\User\OneDrive - The University of Technology\Desktop\test\bin\gateway.exe --scenario K1 --run-id 20261114_173604_r1 --output-dir docs/ketqua/K1/20261114_173604_r1 --udp-port 14550 --measure-seconds 120
+proxy=none
+end=2026-11-14T17:38:10.510511
+status=PASS

@@ -11,4 +11,4 @@ Nguồn: `build.log` và `model.log`. Helper đọc trực tiếp `src/emulator.
 
 `build_exit=0`, `model_exit=0`, `MARKOV MODEL RESULT: pass=1`. Mỗi seed có `seen=kept+dropped`; xác suất chuyển trạng thái ghi `pBG=pGB=0.05`. Dòng CHECK xác nhận cùng seed tái lập, SYSID khác và seed khác cho chuỗi riêng, tick từng slot và tick nhảy cho cùng lịch trạng thái. Với `urb=0`, 180000/180000 frame được giữ, 0 slot B và 0 drop. Năm cấu hình sai đều bị từ chối.
 
-**Kết luận:** PASS PBL3-18 cho các bất biến và phân bố kiểm bằng 180000 slot giả/seed. Đây là kiểm thử mô hình rời rạc, chưa phải kết quả khi ghép vào Gateway; việc đó thuộc PBL3-19.
+**Kết luận:** PASS cho mô hình mất sóng đã chọn: G giữ mọi frame (`lossgood=0`), B bỏ mọi frame (`lossbad=1`), với ba seed, thời lượng đợt B, khả năng tái lập và chế độ OFF đã kiểm. Đây là đủ cho bước kiểm mô hình độc lập PBL3-18 của kế hoạch đơn giản. Kết quả chưa phải phép đo trên lưu lượng PX4 thật; phần đó thuộc PBL3-19 trên tuyến UAV → Gateway. Không thay đổi số liệu thô I18_01.

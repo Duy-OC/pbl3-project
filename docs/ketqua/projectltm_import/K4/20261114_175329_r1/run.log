@@ -1,0 +1,5 @@
+start=2026-11-14T17:53:29.952326
+gateway=C:\Users\User\OneDrive - The University of Technology\Desktop\test\bin\gateway.exe --scenario K4 --run-id 20261114_175329_r1 --output-dir docs/ketqua/K4/20261114_175329_r1 --udp-port 14551 --measure-seconds 60
+proxy=C:\Users\User\OneDrive - The University of Technology\Desktop\test\bin\upstream_markov_proxy.exe --scenario K4 --run-id 20261114_175329_r1 --output-dir docs/ketqua/K4/20261114_175329_r1 --listen-port 14550 --gateway-port 14551 --gateway-source-port 14610 --measure-seconds 60 --seed 1001 --urb 0.10 --burst-packets 4 --lossgood 0 --lossbad 1
+end=2026-11-14T17:54:36.851560
+status=PASS

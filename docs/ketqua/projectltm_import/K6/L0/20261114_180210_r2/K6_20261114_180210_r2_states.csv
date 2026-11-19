@@ -1,0 +1,3 @@
+run_id,sysid,t_ms,event,state
+20261114_180210_r2,1,0,INITIAL,G
+20261114_180210_r2,1,65000,END,G

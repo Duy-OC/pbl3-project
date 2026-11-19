@@ -1,8 +1,8 @@
 // A2: nhan MAVLink truc tiep tu PX4 va chi in thong ke ra console.
 // Khong tao file ket qua. Chay sau khi dong QGC va Gateway.
-#include "../src/network.h"
-#include "../src/mavlink_codec.h"
-#include "../src/time_utils.h"
+#include "../src/common/network.h"
+#include "../src/common/mavlink_codec.h"
+#include "../src/common/time_utils.h"
 
 #include <algorithm>
 #include <cmath>

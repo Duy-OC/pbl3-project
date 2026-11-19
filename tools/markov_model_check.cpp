@@ -1,4 +1,4 @@
-#include "../src/emulator.h"
+#include "../src/common/emulator.h"
 
 #include <array>
 #include <cmath>

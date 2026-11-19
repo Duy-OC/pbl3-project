@@ -1,2 +1,0 @@
-run_id,sysid,frames_in,frames_kept,frames_dropped_emu,ingress_qos_frames,egress_qos_frames,run_slots,run_bad_slots,run_bad_fraction,measurement_drop_fraction,run_complete_bad_runs,run_mean_bad_s,run_initial_partial_bad_runs,run_final_open_bad_run
-I19_03,1,34402,18494,15908,34402,18494,6100,2826,0.463279,0.462415,156,1.76346,1,1

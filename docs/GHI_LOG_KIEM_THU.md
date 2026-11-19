@@ -711,94 +711,186 @@ if ($buildExit -ne 0) { throw 'Markov build failed' }
 "model_exit=$LASTEXITCODE" | Tee-Object -FilePath 'docs\ketqua\PBL3-18_Markov\I18_01\model.log' -Append
 ```
 
-Kỳ vọng `build_exit=0`, `model_exit=0`, `MARKOV MODEL RESULT: pass=1 seeds=3 slots_per_seed=180000`. Mỗi seed 1/2/3 phải có `slots=180000`, `frames_seen=frames_kept+frames_dropped`; `bad_fraction` và `drop_fraction` gần 0.5, `mean_bad_s` gần 2.0. Dòng CHECK phải có `repeat_same_seed=1`, `independent_sysid=1`, `distinct_seeds=1`, `tick_step_equals_jump=1`, `urb_zero_keeps_all=1`, `invalid_configs_rejected=5/5`. Gửi `build.log` và `model.log`; tôi sẽ đối chiếu số liệu thực trước khi sang PBL3-19.
+Kỳ vọng `build_exit=0`, `model_exit=0`, `MARKOV MODEL RESULT: pass=1 seeds=3 slots_per_seed=180000`. Mỗi seed 1/2/3 phải có `slots=180000`, `frames_seen=frames_kept+frames_dropped`; `bad_fraction` và `drop_fraction` gần 0.5, `mean_bad_s` gần 2.0. Dòng CHECK phải có `repeat_same_seed=1`, `independent_sysid=1`, `distinct_seeds=1`, `tick_step_equals_jump=1`, `urb_zero_keeps_all=1`, `invalid_configs_rejected=5/5`. I18_01 đã lưu và đạt cho cấu hình G giữ hết/B bỏ hết dùng để giả lập mất sóng; bước tiếp theo là U19_00.
 
-## PBL3-19: Markov ghép vào Gateway
+## Tuyến mới: Markov giữa PX4 và Gateway
 
-### I19_01: Markov ON, một UAV, một client, seed 1
+Đọc [sơ đồ, các điểm đo và kế hoạch U19_00–03](MARKOV_UAV_GATEWAY.md). Chỉ đo Markov trên tuyến PX4 → proxy → Gateway. Các hướng dẫn và kết quả đặt Markov sau cổng nhận Gateway đã được loại bỏ theo yêu cầu người đo.
 
-**Mục đích:** sau [E0_02 Markov OFF](ketqua/PBL3-14_E0/E0_02/summary.md), kiểm Markov ON trong Gateway với cùng một nguồn PX4 và một TCP client. Gateway ghi chung cửa sổ ingress/egress 600 giây; kiểm `frames_in=frames_kept+frames_dropped_emu`, ingress=frames_in và egress=frames_kept. Chạy seed 1 trước, đối chiếu log rồi mới làm seed tiếp theo. `run_slots` trong Markov summary hiện tính cả 10 giây warm-up; số liệu frame/CSV 600 giây mới là mẫu dùng để đánh giá run. Ghi rõ giới hạn này, không so trực tiếp `run_slots` với 6000 slot.
+### U19_00: kiểm đường đi UAV tới Gateway
 
-Khởi động PX4 UAV 1 SYSID 1, stream từ `14600 → 14550` như E0_02. Đóng QGC, Gateway và client cũ; không bật UAV 2. Chạy PowerShell tại thư mục gốc dự án.
+**Mục đích:** kiểm PX4 gửi đúng tới Windows UDP 14551, proxy Markov OFF chuyển frame tới Gateway từ UDP 14610 và Gateway học nguồn `127.0.0.1:14610`. Đây là lượt kiểm đường đi khoảng 30 giây, **chưa phải** phép đo Markov 600 giây. Không mở QGC, TCP client hay UAV 2.
 
-PowerShell cửa sổ 1:
+Trước hết dừng tiến trình PX4 UAV 1 cũ đang phát `14600 → 14550` (nếu còn chạy). Đừng để luồng trực tiếp cũ cùng tồn tại. Chạy PowerShell từ thư mục gốc dự án.
+
+**Cửa sổ PowerShell 1 — build và chạy Gateway Markov OFF:**
 
 ```powershell
-New-Item -ItemType Directory -Force 'docs\ketqua\PBL3-19_GatewayMarkov\I19_01'
-g++ -std=c++17 -O2 src\gateway.cpp -o docs\ketqua\PBL3-19_GatewayMarkov\I19_01\gateway.exe -lws2_32 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\I19_01\gateway_build.log'
+New-Item -ItemType Directory -Force 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_00'
+g++ -std=c++17 -O2 src\gateway.cpp -o docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_00\gateway.exe -lws2_32 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_00\gateway_build.log'
 $buildExit = $LASTEXITCODE
-"gateway_build_exit=$buildExit" | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\I19_01\gateway_build.log' -Append
+"gateway_build_exit=$buildExit" | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_00\gateway_build.log' -Append
 if ($buildExit -ne 0) { throw 'Gateway build failed' }
-.\docs\ketqua\PBL3-19_GatewayMarkov\I19_01\gateway.exe --scenario I19_ON --run-id I19_01 --urb 0.5 --dur-s 2 --slot-ms 100 --lossgood 0 --lossbad 1 --seed 1 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\I19_01\gateway.log'
+.\docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_00\gateway.exe --scenario U19_PRE --run-id U19_00 --urb 0 --trace-ingress 1 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_00\gateway.log'
 ```
 
-Sau khi Gateway ghi `UAV 1: ONLINE`, PowerShell cửa sổ 2:
+**Cửa sổ PowerShell 2 — build và chạy proxy Markov OFF:**
 
 ```powershell
-g++ -std=c++17 -O2 src\tcpclient.cpp -o docs\ketqua\PBL3-19_GatewayMarkov\I19_01\tcpclient.exe -lws2_32 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\I19_01\client_build.log'
+g++ -std=c++17 -O2 src\upstream_markov_proxy.cpp -o docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_00\upstream_markov_proxy.exe -lws2_32 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_00\proxy_build.log'
 $buildExit = $LASTEXITCODE
-"client_build_exit=$buildExit" | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\I19_01\client_build.log' -Append
-if ($buildExit -ne 0) { throw 'Client build failed' }
-.\docs\ketqua\PBL3-19_GatewayMarkov\I19_01\tcpclient.exe 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\I19_01\client.log'
+"proxy_build_exit=$buildExit" | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_00\proxy_build.log' -Append
+if ($buildExit -ne 0) { throw 'Proxy build failed' }
+.\docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_00\upstream_markov_proxy.exe --scenario U19_PRE --run-id U19_00 --sysid 1 --listen-port 14551 --gateway-source-port 14610 --urb 0 --seed 1 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_00\proxy.log'
 ```
 
-Để Gateway và client chạy qua đủ warm-up 10 giây và cửa sổ 600 giây. **Không dừng Gateway khi vừa thấy client QOS `t=600`;** chờ Gateway cũng in `QOS: t=600` và `Issue19: da ghi ..._markov.csv`. Sau khi cả hai điểm đã tới 600 giây, Ctrl+C client trước rồi Ctrl+C Gateway. Gửi bốn log build/Gateway/client; tôi sẽ chuyển CSV thô từ `docs/ketqua/issue19` và CSV client từ `docs/ketqua` vào thư mục I19_01 sau khi tiến trình dừng.
+**Cửa sổ WSL 3 — khởi động PX4 UAV 1:**
 
-Kỳ vọng Gateway có 120 mốc ingress và egress đến 600 giây, cùng SYSID 1; ingress nhiều frame hơn egress, Markov drop >0, `frames_in=frames_kept+frames_dropped_emu`, `ingress_qos_frames=frames_in`, `egress_qos_frames=frames_kept`. CRC/signature errors=0, BLOCK/queue/sendto/slow client=0. Client vẫn kết nối, nhận được HEARTBEAT; có thể có đợt thiếu heartbeat do kênh B. Không yêu cầu tỷ lệ drop chính xác 50% ở một run 600 giây.
+```bash
+cd ~/PX4-Autopilot
+PX4_SYS_AUTOSTART=4001 PX4_GZ_MODEL_POSE="0,0,0,0,0,0" ./build/px4_sitl_default/bin/px4 -i 0
+```
 
-### I19_02: Markov ON, cùng cấu hình, seed 2
+Tại `pxh>` tạo luồng **14600 → 14551** (14551 là proxy, không phải Gateway):
 
-**Mục đích:** lặp cấu hình ON của I19_01 với seed 2 và **cùng hai executable đã build ở I19_01**. So sánh hai seed bằng CSV trạng thái và Markov summary, không đổi tham số, nguồn PX4, số client hoặc mã giữa hai lượt. Đây là một run 600 giây mới, không gộp số liệu vào I19_01.
+```text
+mavlink start -u 14600 -o 14551 -t 172.26.160.1 -r 100000
+mavlink status
+```
 
-Giữ PX4 UAV 1 SYSID 1 stream từ 14600 tới Gateway 14550. Đóng Gateway và client cũ, QGC và UAV 2. PowerShell cửa sổ 1:
+Chờ proxy in `PX4 SOURCE: ...:14600`, Gateway in `UAV 1 ONLINE tai 127.0.0.1:14610`. Đợi proxy có `PROXY STATS` với `pre>0`, `kept=post_sent`, `dropped_markov=0`, `send_errors=0`. Khoảng 30 giây sau khi có luồng, dừng PX4 UAV 1 ở cửa sổ WSL, đợi các bộ đếm ổn định 5 giây, rồi Ctrl+C proxy và Gateway.
+
+Sau khi hai chương trình dừng, chạy đối chiếu trace từ PowerShell (không tạo kết quả giả):
 
 ```powershell
-New-Item -ItemType Directory -Force 'docs\ketqua\PBL3-19_GatewayMarkov\I19_02'
-.\docs\ketqua\PBL3-19_GatewayMarkov\I19_01\gateway.exe --scenario I19_ON --run-id I19_02 --urb 0.5 --dur-s 2 --slot-ms 100 --lossgood 0 --lossbad 1 --seed 2 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\I19_02\gateway.log'
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\compare_upstream_traces.ps1 -ProxyTrace 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_00\U19_PRE_U19_00_post_trace.csv' -GatewayTrace 'docs\ketqua\issue19\U19_PRE_U19_00_gateway_ingress_trace.csv' 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_00\trace_compare.log'
+"trace_exit=$LASTEXITCODE" | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_00\trace_compare.log' -Append
 ```
 
-Sau khi Gateway ghi `UAV 1: ONLINE`, PowerShell cửa sổ 2:
+Kỳ vọng `missing=0 extra=0 pass=1`, `trace_exit=0`. Gửi `gateway_build.log`, `proxy_build.log`, `gateway.log`, `proxy.log`, `trace_compare.log` và đoạn `mavlink status` của cổng 14600. Tôi sẽ kiểm và chuyển file Gateway thô vào U19_00; sau đó mới hướng dẫn baseline 600 giây của tuyến mới. Nếu Gateway học nguồn `172.26...:14600` thay vì `127.0.0.1:14610`, luồng trực tiếp cũ vẫn đang chạy: giữ log và báo tôi, không tiếp tục run chính.
+
+### U19_01: baseline 600 giây UAV tới Gateway
+
+**Mục đích:** lấy mức bình thường của đúng tuyến đã kiểm ở U19_00. Markov tắt (`urb=0`), một UAV, không QGC/TCP client/UAV 2. Dùng lại hai executable đã build trong U19_00; không cần build lại. Đóng các Gateway, proxy và PX4 cũ trước khi bắt đầu. Mở các cửa sổ tại thư mục gốc dự án.
+
+**PowerShell 1 — Gateway:**
 
 ```powershell
-.\docs\ketqua\PBL3-19_GatewayMarkov\I19_01\tcpclient.exe 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\I19_02\client.log'
+New-Item -ItemType Directory -Force 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_01'
+.\docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_00\gateway.exe --scenario U19_OFF --run-id U19_01 --urb 0 --trace-ingress 1 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_01\gateway.log'
 ```
 
-Đợi Gateway **và client** đều ghi `QOS: t=600`, Gateway ghi `Issue19: da ghi ..._markov.csv`. Ctrl+C client rồi Gateway, gửi hai log. Tôi sẽ đối chiếu và chuyển CSV thô sau khi chúng đã dừng. Kỳ vọng mỗi Gateway ingress/egress có 120 mốc; `frames_in=frames_kept+frames_dropped_emu`, ingress=frames_in, egress=frames_kept, CRC/signature/BLOCK/queue/slow=0. Chỉ số drop/đợt B có thể khác I19_01; đó là lý do đổi seed. `run_slots` vẫn gồm 10 giây warm-up; phân tích cửa sổ 600 giây từ CSV và trạng thái.
-
-### I19_03: Markov ON, cùng cấu hình, seed 3
-
-**Mục đích:** lượt ON thứ ba để có đủ ba seed độc lập trong Gateway trước khi chuyển sang OUTAGE. Dùng **cùng executable Gateway/client của I19_01** và một PX4 UAV 1 stream 14600. Chỉ đổi run ID và seed; đóng QGC, UAV 2, Gateway/client cũ.
-
-PowerShell cửa sổ 1 tại thư mục gốc dự án:
+**PowerShell 2 — proxy:**
 
 ```powershell
-New-Item -ItemType Directory -Force 'docs\ketqua\PBL3-19_GatewayMarkov\I19_03'
-.\docs\ketqua\PBL3-19_GatewayMarkov\I19_01\gateway.exe --scenario I19_ON --run-id I19_03 --urb 0.5 --dur-s 2 --slot-ms 100 --lossgood 0 --lossbad 1 --seed 3 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\I19_03\gateway.log'
+.\docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_00\upstream_markov_proxy.exe --scenario U19_OFF --run-id U19_01 --sysid 1 --listen-port 14551 --gateway-source-port 14610 --urb 0 --seed 1 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_01\proxy.log'
 ```
 
-Khi Gateway ghi `UAV 1: ONLINE`, PowerShell cửa sổ 2:
+**WSL — PX4 UAV 1:**
+
+```bash
+cd ~/PX4-Autopilot
+PX4_SYS_AUTOSTART=4001 PX4_GZ_MODEL_POSE="0,0,0,0,0,0" ./build/px4_sitl_default/bin/px4 -i 0
+```
+
+Trong `pxh>` tạo luồng `14600 → 14551` và ghi `mavlink status`:
+
+```text
+mavlink start -u 14600 -o 14551 -t 172.26.160.1 -r 100000
+mavlink status
+```
+
+Đợi **proxy và Gateway đều ghi QoS tới `t=600`**, proxy in `UPSTREAM RESULT` và tạo `_summary.csv`. Sau đó dừng PX4, đợi khoảng 5 giây cho gói cuối tới Gateway, rồi Ctrl+C proxy và Gateway. Không kết thúc khi mới có mốc 600 của một chương trình.
+
+**PowerShell sau khi dừng hết — đối chiếu frame:**
 
 ```powershell
-.\docs\ketqua\PBL3-19_GatewayMarkov\I19_01\tcpclient.exe 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\I19_03\client.log'
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\compare_upstream_traces.ps1 -ProxyTrace 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_01\U19_OFF_U19_01_post_trace.csv' -GatewayTrace 'docs\ketqua\issue19\U19_OFF_U19_01_gateway_ingress_trace.csv' 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_01\trace_compare.log'
+"trace_exit=$LASTEXITCODE" | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_01\trace_compare.log' -Append
 ```
 
-Đợi cả hai tới `QOS: t=600` và Gateway ghi file `_markov.csv`; Ctrl+C client rồi Gateway. Gửi `gateway.log`, `client.log`. Tôi sẽ kiểm tổng MSGID, `frames_in=kept+dropped_emu`, ingress/egress và trạng thái B trong đúng cửa sổ 600 giây trước khi hướng dẫn OUTAGE. Không yêu cầu tỷ lệ drop của seed 3 bằng seed 1 hoặc 2.
+Kỳ vọng proxy `frames_pre=frames_kept=frames_post_sent`, `frames_dropped_markov=0`, `send_errors=0`; trace `missing=0 extra=0 pass=1`, CRC/signature errors=0 và Gateway học `127.0.0.1:14610`. Gửi `proxy.log`, `gateway.log`, `trace_compare.log`, `_summary.csv` của proxy và `mavlink status`. Tôi sẽ kiểm raw CSV rồi mới chuyển sang U19_02 mất sóng ngắn. Nếu IP Windows trong WSL đã đổi, thay `172.26.160.1` bằng IP hiện tại và ghi IP đã dùng.
 
-### I19_04: OUTAGE, đợt B dài 5 giây, seed 1
+### U19_02: giả lập mất sóng ngắn UAV tới Gateway
 
-**Mục đích:** giữ `urb=0.5` nhưng tăng `dur_s` từ 2 lên 5 giây để kiểm các đợt mất telemetry dài hơn khi Markov được ghép vào Gateway. Ingress từ PX4 phải tiếp tục online, còn egress/client có thể offline trong những đợt B. Đây là lượt OUTAGE đầu; kiểm log trước khi chạy seed tiếp theo.
+**Mục đích:** giữ đúng tuyến của U19_01, bật Markov **chỉ ở proxy**. Trạng thái G giữ mọi frame, B bỏ mọi frame; `urb=0.5`, `dur_s=2`, `seed=1`. Chạy một UAV, không QGC/TCP client/UAV 2. Dùng lại executable đã build trong U19_00. Đóng Gateway, proxy và PX4 của lượt trước. Mọi cửa sổ PowerShell ở thư mục gốc dự án.
 
-Giữ một PX4 UAV 1 SYSID 1 stream `14600 → 14550`; đóng Gateway/client cũ, QGC và UAV 2. Dùng lại **cùng executable Gateway/client đã build tại I19_01**. PowerShell cửa sổ 1 tại thư mục gốc dự án:
+**PowerShell 1 — Gateway, Markov OFF:**
 
 ```powershell
-New-Item -ItemType Directory -Force 'docs\ketqua\PBL3-19_GatewayMarkov\I19_04'
-.\docs\ketqua\PBL3-19_GatewayMarkov\I19_01\gateway.exe --scenario I19_OUTAGE --run-id I19_04 --urb 0.5 --dur-s 5 --slot-ms 100 --lossgood 0 --lossbad 1 --seed 1 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\I19_04\gateway.log'
+New-Item -ItemType Directory -Force 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_02'
+.\docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_00\gateway.exe --scenario U19_LOSS2 --run-id U19_02 --urb 0 --trace-ingress 1 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_02\gateway.log'
 ```
 
-Khi Gateway ghi `UAV 1: ONLINE`, PowerShell cửa sổ 2:
+**PowerShell 2 — proxy, Markov ON:**
 
 ```powershell
-.\docs\ketqua\PBL3-19_GatewayMarkov\I19_01\tcpclient.exe 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\I19_04\client.log'
+.\docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_00\upstream_markov_proxy.exe --scenario U19_LOSS2 --run-id U19_02 --sysid 1 --listen-port 14551 --gateway-source-port 14610 --urb 0.5 --dur-s 2 --slot-ms 100 --lossgood 0 --lossbad 1 --seed 1 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_02\proxy.log'
 ```
 
-Đợi **cả Gateway và client** ghi `QOS: t=600`, Gateway ghi file `_markov.csv`; Ctrl+C client trước rồi Gateway. Gửi `gateway.log` và `client.log`. Tôi sẽ đối chiếu config, ingress/egress/Markov summary, trạng thái B và offline event từ CSV. Kỳ vọng `frames_in=kept+dropped_emu`, ingress QoS=frames_in, egress QoS=kept; ingress offline=0, egress có offline event; CRC/signature/BLOCK/queue/slow=0. Không đặt ngưỡng offline event hay tỷ lệ drop cố định cho một seed. `run_slots` trong summary vẫn gồm warm-up 10 giây; phân tích thời gian B của đúng cửa sổ 600 giây từ `_states.csv`.
+**WSL — PX4 UAV 1:**
+
+```bash
+cd ~/PX4-Autopilot
+PX4_SYS_AUTOSTART=4001 PX4_GZ_MODEL_POSE="0,0,0,0,0,0" ./build/px4_sitl_default/bin/px4 -i 0
+```
+
+Tại `pxh>`:
+
+```text
+mavlink start -u 14600 -o 14551 -t 172.26.160.1 -r 100000
+mavlink status
+```
+
+Nếu IP Windows trong WSL đã đổi, thay `172.26.160.1` bằng IP hiện tại và ghi lại IP dùng. Đợi **cả proxy và Gateway** ghi QoS đến `t=600`; proxy in `UPSTREAM RESULT` và tạo `_summary.csv`. Khi đủ mốc, dừng PX4, đợi khoảng 5 giây rồi Ctrl+C proxy và Gateway.
+
+**PowerShell sau khi dừng hết — đối chiếu frame:**
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\compare_upstream_traces.ps1 -ProxyTrace 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_02\U19_LOSS2_U19_02_post_trace.csv' -GatewayTrace 'docs\ketqua\issue19\U19_LOSS2_U19_02_gateway_ingress_trace.csv' 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_02\trace_compare.log'
+"trace_exit=$LASTEXITCODE" | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_02\trace_compare.log' -Append
+```
+
+Kỳ vọng `frames_pre=frames_kept+frames_dropped_markov`, `frames_dropped_markov>0`, `frames_kept=frames_post_sent` khi `send_errors=0`; trace `missing=0 extra=0 pass=1`, CRC/signature errors=0. Không đòi đúng 50% frame bị mất trong một run. Gửi `proxy.log`, `gateway.log`, `trace_compare.log`, `_summary.csv` của proxy và `mavlink status`; tôi sẽ kiểm trước khi chuyển sang U19_03.
+
+### U19_03: giả lập mất sóng dài UAV tới Gateway
+
+**Mục đích:** giữ đúng tuyến của U19_02, tăng `dur_s` từ 2 lên 5 giây và bật Markov **chỉ ở proxy**. Trạng thái G giữ mọi frame, B bỏ mọi frame; `urb=0.5`, `dur_s=5`, `seed=1`. Chạy một UAV, không QGC/TCP client/UAV 2. Dùng lại executable đã build trong U19_00. Đóng Gateway, proxy và PX4 của lượt trước. Mọi cửa sổ PowerShell ở thư mục gốc dự án.
+
+**PowerShell 1 — Gateway, Markov OFF:**
+
+```powershell
+New-Item -ItemType Directory -Force 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_03'
+.\docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_00\gateway.exe --scenario U19_LOSS5 --run-id U19_03 --urb 0 --trace-ingress 1 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_03\gateway.log'
+```
+
+**PowerShell 2 — proxy, Markov ON:**
+
+```powershell
+.\docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_00\upstream_markov_proxy.exe --scenario U19_LOSS5 --run-id U19_03 --sysid 1 --listen-port 14551 --gateway-source-port 14610 --urb 0.5 --dur-s 5 --slot-ms 100 --lossgood 0 --lossbad 1 --seed 1 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_03\proxy.log'
+```
+
+**WSL — PX4 UAV 1:**
+
+```bash
+cd ~/PX4-Autopilot
+PX4_SYS_AUTOSTART=4001 PX4_GZ_MODEL_POSE="0,0,0,0,0,0" ./build/px4_sitl_default/bin/px4 -i 0
+```
+
+Tại `pxh>`:
+
+```text
+mavlink start -u 14600 -o 14551 -t 172.26.160.1 -r 100000
+mavlink status
+```
+
+Nếu IP Windows trong WSL đã đổi, thay `172.26.160.1` bằng IP hiện tại và ghi lại IP dùng. Đợi **cả proxy và Gateway** ghi QoS đến `t=600`; proxy in `UPSTREAM RESULT` và tạo `_summary.csv`. Khi đủ mốc, dừng PX4, đợi khoảng 5 giây rồi Ctrl+C proxy và Gateway.
+
+**PowerShell sau khi dừng hết — đối chiếu frame:**
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\compare_upstream_traces.ps1 -ProxyTrace 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_03\U19_LOSS5_U19_03_post_trace.csv' -GatewayTrace 'docs\ketqua\issue19\U19_LOSS5_U19_03_gateway_ingress_trace.csv' 2>&1 | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_03\trace_compare.log'
+"trace_exit=$LASTEXITCODE" | Tee-Object -FilePath 'docs\ketqua\PBL3-19_GatewayMarkov\upstream\U19_03\trace_compare.log' -Append
+```
+
+Kỳ vọng `frames_pre=frames_kept+frames_dropped_markov`, `frames_dropped_markov>0`, `frames_kept=frames_post_sent` khi `send_errors=0`; trace `missing=0 extra=0 pass=1`, CRC/signature errors=0. Không đòi đúng 50% frame bị mất trong một run. Gửi `proxy.log`, `gateway.log`, `trace_compare.log`, `_summary.csv` của proxy và `mavlink status`; tôi sẽ kiểm để chốt phép đo mất sóng.

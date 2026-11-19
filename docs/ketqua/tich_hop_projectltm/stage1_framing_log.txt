@@ -1,0 +1,22 @@
+==============================================================
+       KIEM THU GIAI DOAN 1: PARSE FRAME VA CRC MAVLINK       
+==============================================================
+
+--- [CHAY TEST T1.1: Frame mau v1 va v2] ---
+Da test 200 frames (100 v1 + 100 v2). Hop le: 200, Sai CRC: 0
+
+--- [CHAY TEST T1.2: Lat 1 bit trong frame] ---
+Lat bit tai payload va checksum (88 vi tri bit). Phat hien sai CRC: 88/88 (100%), False valid: 0
+
+--- [CHAY TEST T1.3: Datagram ghep, stream byte, resync] ---
+  Case A (Ghep 2 frame vao 1 datagram): Nhan duoc 2/2 frames hop le.
+  Case B (Chia nho frame thanh nhieu chunk stream): Nhan duoc 1/1 frame hop le.
+  Case C (Resync sau 50 byte rac): Nhan duoc 1/1 frame hop le.
+  Case D (Bat loi frame hong roi phuc hoi frame tiep): Caught bad CRC: YES, Nhan duoc 1/1 frame tiep theo.
+Dat ca 4 tinh huong: Ghep datagram (2/2), chia nho chunk stream (1/1), resync sau rac (1/1), phuc hoi sau loi (1/1).
+
+--- [CHAY TEST T1.4: Fuzzing 1.000.000 bytes] ---
+Da feed 1.000.000 bytes rac ngau nhien. Thoi gian: 0.018s (Toc do: 51.31 MB/s). Khong crash.
+
+--- [CHAY TEST T1.5: Stream 10.000 frame lien tuc] ---
+Nhan dung 10.000/10.000 frames (100%). Sai CRC = 0.

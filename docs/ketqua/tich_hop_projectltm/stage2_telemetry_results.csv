@@ -1,0 +1,7 @@
+test_id,test_name,status,detail
+T2.1,"Giai ma HEARTBEAT (PX4 POSCTL, Armed)",PASS,"Armed: TRUE, Flight mode: ARMED | POSCTL"
+T2.2,"Giai ma SYS_STATUS (Pin & Nguon)",PASS,"Voltage: 15.45V, Current: 2.30A, Remaining: 82%"
+T2.3,"Giai ma GLOBAL_POSITION_INT (GPS & Do cao)",PASS,"Lat: 16.073456, Lon: 108.152341, RelAlt: 12.8m, Hdg: 185.2 deg"
+T2.4,"Giai ma ATTITUDE (Goc nghieng)",PASS,"Roll: 5.0 deg, Pitch: -3.0 deg, Yaw: 90.0 deg"
+T2.5,"Giai ma GPS_RAW_INT & VFR_HUD",PASS,"GPS 3D Fix (16 ve tinh), Groundspeed: 4.8 m/s, Throttle: 65%"
+T2.6,"Xuat chuoi GET_DETAIL va JSON",PASS,"Sinh day du text report va JSON hop le cho Client."

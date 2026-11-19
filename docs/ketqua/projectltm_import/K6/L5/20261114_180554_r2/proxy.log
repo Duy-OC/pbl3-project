@@ -1,0 +1,154 @@
+QOS CSV: docs/ketqua/K6/L5/20261114_180554_r2/K6_20261114_180554_r2_proxy_pre.csv
+QOS MSGID: docs/ketqua/K6/L5/20261114_180554_r2/K6_20261114_180554_r2_proxy_pre_msgid.csv
+QOS timeout: 3 giay
+QOS CSV: docs/ketqua/K6/L5/20261114_180554_r2/K6_20261114_180554_r2_proxy_post.csv
+QOS MSGID: docs/ketqua/K6/L5/20261114_180554_r2/K6_20261114_180554_r2_proxy_post_msgid.csv
+QOS timeout: 3 giay
+UPSTREAM PROXY: PX4 -> Windows UDP 14650 -> Markov -> Gateway 127.0.0.1:14651 from 127.0.0.1:14660 | sysid=1 urb=0.05 dur_s=2 slot_ms=100 seed=6002
+REVERSE MARKOV: Gateway -> PX4 urb=0.05 dur_s=2 slot_ms=100 seed=2654432971
+PX4 SOURCE: 127.0.0.1:62296
+PROXY WINDOW: warmup_s=5 measure_s=60 run_id=20261114_180554_r2
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+PROXY STATS: pre=0 kept=0 dropped_markov=0 post_sent=0 send_errors=0 reverse_rx=4 reverse_dropped=0 reverse_tx=4 crc_errors=0
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+PROXY STATS: pre=11 kept=6 dropped_markov=5 post_sent=6 send_errors=0 reverse_rx=7 reverse_dropped=0 reverse_tx=7 crc_errors=0
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+QOS: t=5.14704 s | frames=12
+QOS: t=5.14704 s | frames=7
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+PROXY STATS: pre=28 kept=23 dropped_markov=5 post_sent=23 send_errors=0 reverse_rx=20 reverse_dropped=0 reverse_tx=20 crc_errors=0
+QOS: t=10.3429 s | frames=28
+QOS: t=10.3429 s | frames=23
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+PROXY STATS: pre=43 kept=38 dropped_markov=5 post_sent=38 send_errors=0 reverse_rx=31 reverse_dropped=0 reverse_tx=31 crc_errors=0
+QOS: t=15.3762 s | frames=44
+QOS: t=15.3762 s | frames=39
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+PROXY STATS: pre=59 kept=52 dropped_markov=7 post_sent=52 send_errors=0 reverse_rx=42 reverse_dropped=0 reverse_tx=42 crc_errors=0
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+QOS: t=20.4523 s | frames=60
+QOS: t=20.4523 s | frames=53
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=45
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+PROXY STATS: pre=76 kept=69 dropped_markov=7 post_sent=69 send_errors=0 reverse_rx=55 reverse_dropped=0 reverse_tx=55 crc_errors=0
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+QOS: t=25.5615 s | frames=77
+QOS: t=25.5615 s | frames=70
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+PROXY STATS: pre=92 kept=85 dropped_markov=7 post_sent=85 send_errors=0 reverse_rx=66 reverse_dropped=0 reverse_tx=66 crc_errors=0
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+QOS: t=30.5786 s | frames=94
+QOS: t=30.5786 s | frames=87
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=45
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+PROXY STATS: pre=109 kept=100 dropped_markov=9 post_sent=100 send_errors=0 reverse_rx=79 reverse_dropped=0 reverse_tx=79 crc_errors=0
+QOS: t=35.6868 s | frames=110
+QOS: t=35.6868 s | frames=101
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=44
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+PROXY STATS: pre=119 kept=110 dropped_markov=9 post_sent=110 send_errors=0 reverse_rx=84 reverse_dropped=0 reverse_tx=84 crc_errors=0
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+QOS: t=40.7105 s | frames=120
+QOS: t=40.7105 s | frames=111
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+PROXY STATS: pre=129 kept=120 dropped_markov=9 post_sent=120 send_errors=0 reverse_rx=89 reverse_dropped=0 reverse_tx=89 crc_errors=0
+QOS: t=45.7109 s | frames=129
+QOS: t=45.7109 s | frames=120
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+PROXY STATS: pre=139 kept=129 dropped_markov=10 post_sent=129 send_errors=0 reverse_rx=94 reverse_dropped=1 reverse_tx=93 crc_errors=0
+QOS: t=50.8405 s | frames=139
+QOS: t=50.8405 s | frames=129
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+PROXY STATS: pre=148 kept=138 dropped_markov=10 post_sent=138 send_errors=0 reverse_rx=99 reverse_dropped=2 reverse_tx=97 crc_errors=0
+QOS: t=55.9808 s | frames=149
+QOS: t=55.9808 s | frames=139
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+QOS: t=60 s | frames=156
+QOS: da ket thuc 60 giay; Gateway/client van tiep tuc chay
+QOS: t=60 s | frames=146
+QOS: da ket thuc 60 giay; Gateway/client van tiep tuc chay
+UPSTREAM RESULT: pre=156 pre_good=146 pre_bad=10 kept=146 dropped_markov=10 dropped_good=0 dropped_bad=10 post_sent=146 send_errors=0 reverse_pre=99 reverse_dropped=2 reverse_post=97 slots_including_warmup=166 summary=docs/ketqua/K6/L5/20261114_180554_r2/K6_20261114_180554_r2_summary.csv
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+PROXY STATS: pre=156 kept=146 dropped_markov=10 post_sent=146 send_errors=0 reverse_rx=104 reverse_dropped=2 reverse_tx=102 crc_errors=0
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21
+REVERSE: Gateway -> PX4 127.0.0.1:62296 bytes=21

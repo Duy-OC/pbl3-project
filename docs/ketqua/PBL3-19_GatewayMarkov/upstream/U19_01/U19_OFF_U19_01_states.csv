@@ -1,0 +1,3 @@
+run_id,sysid,t_ms,event,state
+U19_01,1,0,INITIAL,G
+U19_01,1,610000,END,G
