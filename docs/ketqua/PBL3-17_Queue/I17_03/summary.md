@@ -1,7 +1,5 @@
 # I17_03 — giới hạn hàng đợi UDP 512 gói
 
-Nguồn: hai build log, `probe.log`, `gateway.log` và sáu file Gateway thô trong thư mục này. PX4 UAV 1 SYSID 1 tại `172.26.162.42:14600`; Gateway Markov OFF, `test_hold_udp_ms=300000`. Đây là phép thử giới hạn queue, không phải QoS 600 giây.
-
 - Gateway/probe build exit 0. Probe gửi 513 frame/22572 byte MAV_CMD_REQUEST_MESSAGE tới SYSID 1, nhận `peer_closed=1`, exit 0.
 - Gateway xếp lần lượt tới `queued=512`; frame thứ 513 gặp `QUEUE FULL: client=1 queued=512 incoming=1 limit=512`. Ngay sau đó Gateway ghi `Client #1 DISCONNECTED` và `QUEUE CANCEL: reason=client_disconnected count=512`.
 - Mẫu STATS sau hủy: `Client RX=513`, `UDP queued=0 | UDP dropped/cancelled=512`, `UDP TX frames=0`, `Blocked messages=0`, CRC/signature errors=0. UAV 1 vẫn ONLINE. 512 gói đã xếp bị hủy; frame thứ 513 bị từ chối trước khi vào queue.

@@ -1,8 +1,7 @@
 # Trình tự kiểm thử PBL3 theo Issue
 
+> Ghi chú: Các lệnh và số liệu đo dưới đây thuộc phiên bản lịch sử. Gateway hiện tại chỉ in thống kê trên console; xem README để build và chạy.
 Đây là **danh sách điều hành** cho lần kiểm thử lại từ đầu. Đi từ PBL3-01 đến PBL3-22; PBL3-23 đến PBL3-25 là mở rộng tùy chọn chưa triển khai. Mỗi bước trả lời một câu hỏi và chỉ đánh dấu `ĐẠT` sau khi có bằng chứng của **phiên hiện tại**. Issue GitHub đã đóng là trạng thái lịch sử, không tự thay cho lần kiểm thử mới.
-
-**Bước đang làm: PBL3-19 — U19_03 giả lập mất sóng dài trên tuyến UAV → Gateway.** PBL3-01 tạm hoãn theo yêu cầu người đo. PBL3-02 đến PBL3-14 và PBL3-16–18 đã PASS trong phạm vi từng bước; PBL3-15 đã lưu source/PX4/stream, còn thiếu trạng thái Armed/Disarmed của E0_02. PBL3-08 còn thiếu video/bản log đầy đủ của lượt thao tác. Chỉ người đo chạy phép thử; tài liệu này không tự tạo số liệu.
 
 ## Thư mục kết quả
 
@@ -39,9 +38,6 @@ Giữ một thư mục cho mỗi Issue và một thư mục con cho mỗi run kh
 | 15 | [PBL3-15](https://github.com/Duy-OC/pbl3-project/issues/18): có tái lập đúng source và điều kiện đo? | Commit/hash source, submodule MAVLink, phiên bản PX4, lệnh stream, trạng thái UAV, số client, tên run. | **CÓ HỒ SƠ, CÒN GIỚI HẠN**: `E0_02/reproducibility.md`, 12 hash source, MAVLink/PX4 commit, lệnh stream/launch, một UAV đứng trên mặt đất, một client; Armed/Disarmed không được ghi trong run. |
 | 16 | [PBL3-16](https://github.com/Duy-OC/pbl3-project/issues/19): nhiều client, reconnect, client chậm có ổn? | 20 reconnect; client không đọc; mức 1/5/10 và kết nối thứ 11; log, CPU/RAM/handle. | **PASS**: `PBL3-16_Clients/summary.md`, I16_01–06 đủ reconnect/slow/cap và tải 1/5/10 trong 600 s/mức. |
 | 17 | [PBL3-17](https://github.com/Duy-OC/pbl3-project/issues/20): route offline có BLOCK và hủy queue đúng? | D1–D5: no-route/BLOCK, queue bị hủy khi route đổi/client ngắt, queue đầy/sendto lỗi; log từng nhánh. | **PASS**: [tổng hợp](ketqua/PBL3-17_Queue/summary.md) từ I09_01/02 và I17_01/02C/03/04/05; lệnh cũ bị hủy trước khi endpoint 14602 ONLINE, UDP TX vẫn 0. |
-| 18 | [PBL3-18](https://github.com/Duy-OC/pbl3-project/issues/21): mô hình hai trạng thái có tạo được đợt mất sóng? | G giữ 100% frame, B bỏ 100%; 3 seed × 180000 slot giả, kiểm thời lượng B, seed/tick/OFF và bộ đếm. | **PASS trong phạm vi mô hình mất sóng đã chọn**: [I18_01](ketqua/PBL3-18_Markov/I18_01/summary.md). |
-| 19 | [PBL3-19](https://github.com/Duy-OC/pbl3-project/issues/22): mất sóng trên tuyến UAV → Gateway ảnh hưởng thế nào? | Proxy nhận frame từ UAV, tạo đợt mất sóng rồi gửi Gateway; đo OFF, mất sóng ngắn/dài và đối chiếu frame Gateway nhận. | **ĐANG LÀM**: [U19_00 PASS](ketqua/PBL3-19_GatewayMarkov/upstream/U19_00/summary.md) cho đường đi, 10139/10139 frame khớp. U19_01 và [U19_02](ketqua/PBL3-19_GatewayMarkov/upstream/U19_02/summary.md) đã PASS; kế tiếp U19_03. |
-| 20 | [PBL3-20](https://github.com/Duy-OC/pbl3-project/issues/23): ảnh hưởng tham số và tải là gì? | Sau các run mất sóng cơ bản, nếu cần thì đổi thêm tham số hoặc seed ở proxy UAV → Gateway. Các ca tải client của Gateway đánh giá riêng. | **CHƯA ĐO**. |
 | 21 | [PBL3-21](https://github.com/Duy-OC/pbl3-project/issues/24): số liệu có được phân tích và vẽ lại? | Script đọc raw CSV, ≥4 biểu đồ; ghi đơn vị, mẫu, seed, phân tán; không suy latency một chiều. | **CHƯA LÀM**. |
 | 22 | [PBL3-22](https://github.com/Duy-OC/pbl3-project/issues/25): người khác có build/chạy và kiểm chứng được? | README đầy đủ, bảng run ↔ raw file, kết luận/giới hạn, slide, video demo 3–5 phút. | **CHƯA ĐỦ**: README còn rất ngắn. |
 
@@ -58,7 +54,7 @@ Giữ một thư mục cho mỗi Issue và một thư mục con cho mỗi run kh
 **Mục đích:** xác nhận Gateway học hai UAV có SYSID/endpoint riêng và chuyển lệnh đúng đích. Giai đoạn đầu chỉ kiểm hai nguồn online; chưa gửi Takeoff/Land.
 
 1. Giữ PX4/Gazebo đầu tiên đã dùng ở A2/E0 (UAV 1, UDP source 14600) và mở PX4 SITL thứ hai với instance khác. Trong `pxh>` của UAV 2, kiểm SYSID=2 và cấu hình một MAVLink UDP local port 14601 tới Windows UDP 14550. Ghi lệnh và `mavlink status` của cả hai. Nếu IP Windows từ WSL đã đổi, dùng IP mới thay vì số cũ.
-2. Tạo thư mục run `docs/ketqua/PBL3-08_Route/I08_01/`, khởi động Gateway `--scenario I08_ROUTE --run-id I08_01 --urb 0` qua `Tee-Object` để lưu `gateway.log`. Kết nối QGC TCP `127.0.0.1:5760`.
+2. Tạo thư mục run `docs/ketqua/PBL3-08_Route/I08_01/`, khởi động Gateway `--scenario I08_ROUTE --run-id I08_01` qua `Tee-Object` để lưu `gateway.log`. Kết nối QGC TCP `127.0.0.1:5760`.
 3. Kiểm Gateway STATS có `UAV online=2`, hai dòng UAV 1/2 và QGC thấy hai UAV. Gửi đoạn log đó; giữ run đang chạy để bước sau kiểm lệnh riêng từng UAV. Chưa phát lệnh bay ở giai đoạn chuẩn bị này.
 
 ## Bước đã hoàn thành: PBL3-09
@@ -101,11 +97,3 @@ E0_01 có 120 mẫu QoS/điểm đến 600 s; mọi mẫu có tổng MSGID khớ
 ## Bước đã hoàn thành: PBL3-17
 
 **Kết quả:** [PBL3-17 PASS](ketqua/PBL3-17_Queue/summary.md), gồm BLOCK/no-route, phục hồi endpoint, hủy queue vì client ngắt/route hết hạn, giới hạn 512, lỗi `sendto` và việc request cũ không sang endpoint mới. Hai lượt I17_02 và I17_02B không đạt điều kiện đã được xóa theo yêu cầu.
-
-## Bước đã hoàn thành: PBL3-18
-
-**Kết quả:** [I18_01 PASS](ketqua/PBL3-18_Markov/I18_01/summary.md) cho mô hình G giữ hết/B bỏ hết, ba seed và 180000 slot giả mỗi seed. Đây là trường hợp mô phỏng mất sóng được chọn cho phép đo UAV → Gateway; không cần kiểm thêm các mức mất trung gian trước khi chạy U19_00.
-
-## Bước hiện tại: PBL3-19
-
-**Mục đích:** xem các đợt mất sóng trước Gateway làm thay đổi số frame Gateway nhận thế nào. [U19_00 đã PASS](ketqua/PBL3-19_GatewayMarkov/upstream/U19_00/summary.md) cho đường đi và đối chiếu trace. [U19_01 đã PASS](ketqua/PBL3-19_GatewayMarkov/upstream/U19_01/summary.md) cho baseline 600 giây. [U19_02 đã PASS](ketqua/PBL3-19_GatewayMarkov/upstream/U19_02/summary.md). **Lượt tiếp theo là U19_03**; xem [lệnh chạy](GHI_LOG_KIEM_THU.md#u19_03-giả-lập-mất-sóng-dài-uav-tới-gateway). Sau đó đo U19_02 mất sóng ngắn và U19_03 mất sóng dài theo [hướng dẫn Markov](MARKOV_UAV_GATEWAY.md).

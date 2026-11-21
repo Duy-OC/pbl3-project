@@ -18,8 +18,6 @@ Dữ liệu lịch sử không chứng nhận mã hiện tại. Gateway/client h
 
 - [summary.md](summary.md)
 
-Chi tiết lượt gốc: Các run tải 1/5/10 dùng cùng PX4 stream 14600, Gateway Markov OFF và executable helper. Ingress Gateway theo run lần lượt 33989, 33943, 34084 frame/600 s; tốc độ nguồn gần tương đương. CPU tích lũy của Gateway trong ~600 s lần lượt tăng 4.531, 8.188, 11.328 s; TCP TX cuối log 1400274, 6989660, 14048020 byte. Đây là mô tả ba quan sát, không suy quan hệ tuyến tính hay năng lực tối đa ngoài 10 client.
-
 ## Các nhóm/lượt con
 
 - [I16_01](I16_01/README.md)

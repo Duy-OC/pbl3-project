@@ -33,7 +33,4 @@ Dữ liệu lịch sử không chứng nhận mã hiện tại. Gateway/client h
 - [PBL3-14_E0](PBL3-14_E0/README.md)
 - [PBL3-16_Clients](PBL3-16_Clients/README.md)
 - [PBL3-17_Queue](PBL3-17_Queue/README.md)
-- [PBL3-18_Markov](PBL3-18_Markov/README.md)
-- [PBL3-19_GatewayMarkov](PBL3-19_GatewayMarkov/README.md)
-- [projectltm_import](projectltm_import/README.md)
-- [tich_hop_projectltm](tich_hop_projectltm/README.md)
+

@@ -9,6 +9,4 @@
 | I16_05 | 5 client, 600 s | Mỗi client 33938–33939 frame, 556 HB, 0 lỗi/ngắt |
 | I16_06 | 10 client, 600 s | Mỗi client 34078–34079 frame, 558 HB, 0 lỗi/ngắt |
 
-Các run tải 1/5/10 dùng cùng PX4 stream 14600, Gateway Markov OFF và executable helper. Ingress Gateway theo run lần lượt 33989, 33943, 34084 frame/600 s; tốc độ nguồn gần tương đương. CPU tích lũy của Gateway trong ~600 s lần lượt tăng 4.531, 8.188, 11.328 s; TCP TX cuối log 1400274, 6989660, 14048020 byte. Đây là mô tả ba quan sát, không suy quan hệ tuyến tính hay năng lực tối đa ngoài 10 client.
-
 **Kết luận:** PASS PBL3-16 trong điều kiện mô phỏng và mức tải đã đo. File raw và nhận xét chi tiết nằm ở từng thư mục I16_01–06.

@@ -18,8 +18,6 @@ Dữ liệu lịch sử không chứng nhận mã hiện tại. Gateway/client h
 
 - [summary.md](summary.md)
 
-Chi tiết lượt gốc: Nguồn: `build.log`, `probe.log`, `gateway.log` và sáu file Gateway thô trong thư mục này. Một PX4 UAV SYSID 1 tại `172.26.162.42:14600`; Gateway Markov OFF, `test_hold_udp_ms=10000`. Đây là lượt kích hoạt nhánh hàng đợi, không phải phép đo QoS 600 giây.
-
 ## Cấu hình của lượt
 
 [I17_CANCEL_CLIENT_I17_01_config.txt](I17_CANCEL_CLIENT_I17_01_config.txt)

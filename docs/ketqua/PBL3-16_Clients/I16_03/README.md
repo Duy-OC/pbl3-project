@@ -18,8 +18,6 @@ Dữ liệu lịch sử không chứng nhận mã hiện tại. Gateway/client h
 
 - [summary.md](summary.md)
 
-Chi tiết lượt gốc: Nguồn: `cap11.log`, `gateway.log` và sáu file Gateway trong thư mục này. Một UAV SYSID 1, Markov OFF. Ca ngắn kiểm giới hạn kết nối, không thay cho phép tải 600 s/mức.
-
 ## Cấu hình của lượt
 
 [I16_CAP_I16_03_config.txt](I16_CAP_I16_03_config.txt)

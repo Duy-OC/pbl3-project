@@ -11,8 +11,6 @@
 | QGC qua Gateway TCP | Không có run/ảnh/log mới. | **Chưa thử lại** hiển thị và cập nhật qua TCP 5760. |
 | B2 nhiều client | Không có run/log mới. | **Chưa thử lại** fan-out 1/5/10 client, 20 reconnect, client chậm, giới hạn 10, CPU/RAM/handle. |
 | D1–D5 route hai UAV | Không có run/log mới. | **Chưa thử lại** command/ACK đúng đích, BLOCK khi offline, phục hồi endpoint, hủy queue, queue đầy/sendto lỗi. |
-| C1 Markov độc lập | Source còn, test cũ đã xóa. | **Chưa thử lại** seed/lịch giả/180000 slot/kiểm phân bố. |
-| C2 và E1–E6 | Chỉ có E0 OFF; chưa có ON/OUTAGE hoặc ma trận. | **Chưa đo** Markov hoạt động, outage, tác động của `urb/dur/lossbad`, tải 1/5/10 client, E6 1800 s. `run_slots=6100` trong E0 gồm cả 10 s warm-up; không dùng nó như số slot của cửa sổ 600 s trước khi kiểm tra/sửa thống kê Markov. |
 | R phân tích/bàn giao | Có hướng dẫn và kế hoạch đo; README hiện rất ngắn. | **Chưa có** script phân tích mới, biểu đồ, báo cáo HTML mới, hồ sơ môi trường đầy đủ, README tái lập, slide/video mới. |
 
 ## Việc đã sửa sau khi đọc E0

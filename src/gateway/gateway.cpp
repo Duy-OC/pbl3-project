@@ -4,7 +4,7 @@
 #include "uav_manager.h"
 #include "client_manager.h"
 #include "statistics.h"
-#include "emulator.h"
+#include <cmath>
 #include <windows.h>
 #include <winerror.h>
 
@@ -22,10 +22,9 @@
 
 struct RunOptions
 {
-    Markov::Config markov;
     unsigned short udpPort = Config::UDP_PORT;
     unsigned short tcpPort = Config::TCP_PORT;
-    std::string scenario = "I19_OFF";
+    std::string scenario = "DEFAULT";
     std::string runId;
     std::uint64_t testHoldUdpMs = 0;
     bool testSendtoInvalidAddrlenOnce = false;
@@ -44,7 +43,6 @@ static std::string safeName(const std::string &value)
 static RunOptions parseOptions(int argc, char **argv)
 {
     RunOptions options;
-    options.markov.urb = 0.0;
     options.runId = std::to_string(
         std::chrono::duration_cast<std::chrono::milliseconds>(
             std::chrono::system_clock::now().time_since_epoch()).count());
@@ -69,34 +67,22 @@ static RunOptions parseOptions(int argc, char **argv)
                 if (key == "--udp-port") options.udpPort = static_cast<unsigned short>(number);
                 else options.tcpPort = static_cast<unsigned short>(number);
             }
-            else if (key == "--urb") options.markov.urb = number;
-            else if (key == "--dur-s") options.markov.dur_s = number;
-            else if (key == "--lossgood") options.markov.lossgood = number;
-            else if (key == "--lossbad") options.markov.lossbad = number;
             else if (key == "--test-sendto-invalid-addrlen-once")
             {
                 if (number != 0.0 && number != 1.0)
                     throw std::invalid_argument("Gia tri phai la 0 hoac 1: " + value);
                 options.testSendtoInvalidAddrlenOnce = number == 1.0;
             }
-            else if (key == "--slot-ms" || key == "--seed" ||
-                     key == "--test-hold-udp-ms")
+            else if (key == "--test-hold-udp-ms")
             {
                 if (number < 0 || !std::isfinite(number) ||
-                    number != std::floor(number) ||
-                    number > (key == "--seed" ? 4294967295.0 :
-                              key == "--test-hold-udp-ms" ? 300000.0 :
-                              9007199254740991.0))
+                    number != std::floor(number) || number > 300000.0)
                     throw std::invalid_argument("So nguyen khong hop le: " + value);
-                if (key == "--seed") options.markov.seed = static_cast<std::uint32_t>(number);
-                else if (key == "--test-hold-udp-ms")
-                    options.testHoldUdpMs = static_cast<std::uint64_t>(number);
-                else options.markov.slot_ms = static_cast<std::uint64_t>(number);
+                options.testHoldUdpMs = static_cast<std::uint64_t>(number);
             }
             else throw std::invalid_argument("Tham so khong biet: " + key);
         }
     }
-    options.markov.validate();
     return options;
 }
 
@@ -121,7 +107,7 @@ class Gateway
 {
 public:
     explicit Gateway(const RunOptions &options)
-        : options_(options), emulator_(options.markov) {}
+        : options_(options) {}
     ~Gateway();
 
     Gateway(const Gateway &) = delete;
@@ -169,14 +155,6 @@ private:
     UavManager uavs_;
 
     RunOptions options_;
-    Markov::Emulator emulator_;
-    TimePoint emulatorStart_ = Clock::now();
-    std::uint64_t emulatorMs(TimePoint now) const
-    {
-        return static_cast<std::uint64_t>(
-            std::chrono::duration_cast<std::chrono::milliseconds>(now - emulatorStart_).count());
-    }
-
     Statistics stats_;
     StatisticsReporter reporter_;
 
@@ -365,8 +343,6 @@ void Gateway::maintenance()
         }
         else ++it;
     }
-
-    emulator_.tick(emulatorMs(now));
 
     for (int sysid : uavs_.expire(now))
     {
@@ -970,18 +946,13 @@ void Gateway::receiveUavData()
 
         std::string packet = serialize(message);
 
-        const bool keep = emulator_.keepFrame(message.sysid, emulatorMs(now));
-
-        if (keep)
-        {
-            clients_.broadcast(
-                packet,
-                stats_,
-                [this](SOCKET owner)
-                {
-                    purgeClientQueue(owner);
-                });
-        }
+        clients_.broadcast(
+            packet,
+            stats_,
+            [this](SOCKET owner)
+            {
+                purgeClientQueue(owner);
+            });
 
         if (message.msgid == MAVLINK_MSG_ID_COMMAND_ACK)
         {
@@ -1030,8 +1001,7 @@ int main(int argc, char **argv)
     {
         std::cerr << error.what() << "\nUsage: gateway.exe [--scenario NAME] "
                   << "[--udp-port PORT] [--tcp-port PORT] "
-                  << "[--run-id ID] [--urb N] [--dur-s N] [--slot-ms N] "
-                  << "[--lossgood N] [--lossbad N] [--seed N] "
+                  << "[--run-id ID] "
                   << "[--test-hold-udp-ms N] "
                   << "[--test-sendto-invalid-addrlen-once 0|1] "
                   << "\n";

@@ -20,8 +20,6 @@ Dữ liệu lịch sử không chứng nhận mã hiện tại. Gateway/client h
 - [reproducibility.md](reproducibility.md)
 - [summary.md](summary.md)
 
-Chi tiết lượt gốc: Nguồn: `gateway.log`, `client.log`, `metadata.log`, `resources.csv`, config/Markov/CSV Gateway và hai CSV client trong cùng thư mục. Gateway Markov OFF (`urb=0`), seed 1, warm-up 10 s, cửa sổ đo 600 s. Dữ liệu chỉ có SYSID 1; Gateway ghi 135 mẫu `UAV online=1 | UAV da hoc=1 | Clients=1`, không có mẫu hai UAV online.
-
 ## Cấu hình của lượt
 
 [E0_E0_02_config.txt](E0_E0_02_config.txt)
@@ -54,7 +52,6 @@ Số dòng không gồm header. Giá trị dưới đây chỉ thuộc **bản g
 | [E0_E0_02_gateway_egress_msgid.csv](E0_E0_02_gateway_egress_msgid.csv) | 3716 | sysid=1; compid=1; t_s=600.000; frames=558; frame_bytes=20646 |
 | [E0_E0_02_gateway_ingress.csv](E0_E0_02_gateway_ingress.csv) | 120 | sysid=1; compid=1; t_s=600.000; frames=34074; frame_bytes=1376377 |
 | [E0_E0_02_gateway_ingress_msgid.csv](E0_E0_02_gateway_ingress_msgid.csv) | 3716 | sysid=1; compid=1; t_s=600.000; frames=558; frame_bytes=20646 |
-| [E0_E0_02_markov.csv](E0_E0_02_markov.csv) | 1 | sysid=1 |
 | [E0_E0_02_states.csv](E0_E0_02_states.csv) | 2 | sysid=1 |
 | [resources.csv](resources.csv) | 22 | timestamp=2026-11-12T15:05:21.7915223+07:00; process=tcpclient; id=19776; cpu_seconds=1.6875; working_set_bytes=6782976 |
 

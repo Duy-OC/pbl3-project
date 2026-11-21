@@ -18,8 +18,6 @@ Dữ liệu lịch sử không chứng nhận mã hiện tại. Gateway/client h
 
 - [summary.md](summary.md)
 
-Chi tiết lượt gốc: Nguồn: `gateway_build.log`, `probe_first.log`, `probe_second.log`, `gateway.log` và sáu file Gateway thô trong thư mục này. PX4 UAV 1 SYSID 1 tại `172.26.162.42:14600`; Gateway Markov OFF, `test_hold_udp_ms=0`, `test_sendto_invalid_addrlen_once=1`.
-
 ## Cấu hình của lượt
 
 [I17_SENDTO_I17_04_config.txt](I17_SENDTO_I17_04_config.txt)

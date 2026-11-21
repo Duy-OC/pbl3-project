@@ -18,8 +18,6 @@ Dữ liệu lịch sử không chứng nhận mã hiện tại. Gateway/client h
 
 - [summary.md](summary.md)
 
-Chi tiết lượt gốc: Nguồn: `client_load.log`, `gateway.log`, `resources.csv` và bảy file Gateway trong cùng thư mục. Một PX4 UAV SYSID 1, Markov OFF, helper một client, warm-up 10 s, đo 600 s.
-
 ## Cấu hình của lượt
 
 [I16_LOAD1_I16_04_config.txt](I16_LOAD1_I16_04_config.txt)
@@ -50,7 +48,6 @@ Số dòng không gồm header. Giá trị dưới đây chỉ thuộc **bản g
 | [I16_LOAD1_I16_04_gateway_egress_msgid.csv](I16_LOAD1_I16_04_gateway_egress_msgid.csv) | 3718 | sysid=1; compid=1; t_s=600.000; frames=557; frame_bytes=20609 |
 | [I16_LOAD1_I16_04_gateway_ingress.csv](I16_LOAD1_I16_04_gateway_ingress.csv) | 120 | sysid=1; compid=1; t_s=600.000; frames=33989; frame_bytes=1377306 |
 | [I16_LOAD1_I16_04_gateway_ingress_msgid.csv](I16_LOAD1_I16_04_gateway_ingress_msgid.csv) | 3718 | sysid=1; compid=1; t_s=600.000; frames=557; frame_bytes=20609 |
-| [I16_LOAD1_I16_04_markov.csv](I16_LOAD1_I16_04_markov.csv) | 1 | sysid=1 |
 | [I16_LOAD1_I16_04_states.csv](I16_LOAD1_I16_04_states.csv) | 2 | sysid=1 |
 | [resources.csv](resources.csv) | 21 | timestamp=2026-11-13T20:47:04.1435640+07:00; process=gateway; id=20776; cpu_seconds=4.65625; working_set_bytes=7028736 |
 

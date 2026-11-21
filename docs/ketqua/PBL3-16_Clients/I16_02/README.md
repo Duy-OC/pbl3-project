@@ -18,8 +18,6 @@ Dữ liệu lịch sử không chứng nhận mã hiện tại. Gateway/client h
 
 - [summary.md](summary.md)
 
-Chi tiết lượt gốc: Nguồn: `gateway.log`, `normal_client.log`, `slow_client.log`, `resources.csv`, config/Markov/CSV Gateway và hai CSV client thường trong thư mục này. Một UAV SYSID 1, Gateway Markov OFF, một client thường đọc dữ liệu và một client TCP có receive buffer 1024 byte không gọi `recv` trong 600 s.
-
 ## Cấu hình của lượt
 
 [I16_SLOW_I16_02_config.txt](I16_SLOW_I16_02_config.txt)
@@ -52,7 +50,6 @@ Số dòng không gồm header. Giá trị dưới đây chỉ thuộc **bản g
 | [I16_SLOW_I16_02_gateway_egress_msgid.csv](I16_SLOW_I16_02_gateway_egress_msgid.csv) | 3718 | sysid=1; compid=1; t_s=600.000; frames=556; frame_bytes=20572 |
 | [I16_SLOW_I16_02_gateway_ingress.csv](I16_SLOW_I16_02_gateway_ingress.csv) | 120 | sysid=1; compid=1; t_s=600.000; frames=33913; frame_bytes=1374226 |
 | [I16_SLOW_I16_02_gateway_ingress_msgid.csv](I16_SLOW_I16_02_gateway_ingress_msgid.csv) | 3718 | sysid=1; compid=1; t_s=600.000; frames=556; frame_bytes=20572 |
-| [I16_SLOW_I16_02_markov.csv](I16_SLOW_I16_02_markov.csv) | 1 | sysid=1 |
 | [I16_SLOW_I16_02_states.csv](I16_SLOW_I16_02_states.csv) | 2 | sysid=1 |
 | [resources.csv](resources.csv) | 22 | timestamp=2026-11-13T20:28:26.8799777+07:00; process=tcpclient; id=10804; cpu_seconds=1.578125; working_set_bytes=6832128 |
 

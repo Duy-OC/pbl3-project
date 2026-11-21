@@ -18,8 +18,6 @@ Dữ liệu lịch sử không chứng nhận mã hiện tại. Gateway/client h
 
 - [summary.md](summary.md)
 
-Chi tiết lượt gốc: Nguồn: `reconnect.log`, `gateway.log`, `resources.csv` và sáu file Gateway trong cùng thư mục. Một UAV SYSID 1 tại `172.26.162.42:14600`, Markov OFF (`urb=0`). Mỗi `route_probe` tạo một TCP connection mới, gửi `command=512` yêu cầu message, nhận ACK rồi đóng.
-
 ## Cấu hình của lượt
 
 [I16_RECONNECT_I16_01_config.txt](I16_RECONNECT_I16_01_config.txt)

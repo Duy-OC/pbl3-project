@@ -18,8 +18,6 @@ Dữ liệu lịch sử không chứng nhận mã hiện tại. Gateway/client h
 
 - [summary.md](summary.md)
 
-Chi tiết lượt gốc: Nguồn: `gateway.log`, `old_probe.log` và sáu file Gateway thô trong thư mục này. Gateway Markov OFF, `test_hold_udp_ms=300000`. Probe gửi một MAV_CMD_REQUEST_MESSAGE=512 đến SYSID 1 và giữ TCP 180 giây.
-
 ## Cấu hình của lượt
 
 [I17_ENDPOINT_CHANGE_I17_05_config.txt](I17_ENDPOINT_CHANGE_I17_05_config.txt)

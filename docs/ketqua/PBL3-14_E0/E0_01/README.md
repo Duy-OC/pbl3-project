@@ -34,5 +34,4 @@ Số dòng không gồm header. Giá trị dưới đây chỉ thuộc **bản g
 | [E0_E0_01_gateway_egress_msgid.csv](E0_E0_01_gateway_egress_msgid.csv) | 3720 | sysid=1; compid=1; t_s=600.000; frames=572; frame_bytes=21164 |
 | [E0_E0_01_gateway_ingress.csv](E0_E0_01_gateway_ingress.csv) | 120 | sysid=1; compid=1; t_s=600.000; frames=34900; frame_bytes=1410290 |
 | [E0_E0_01_gateway_ingress_msgid.csv](E0_E0_01_gateway_ingress_msgid.csv) | 3720 | sysid=1; compid=1; t_s=600.000; frames=572; frame_bytes=21164 |
-| [E0_E0_01_markov.csv](E0_E0_01_markov.csv) | 1 | sysid=1 |
 | [E0_E0_01_states.csv](E0_E0_01_states.csv) | 2 | sysid=1 |

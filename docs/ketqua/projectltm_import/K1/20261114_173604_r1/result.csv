@@ -1,2 +1,0 @@
-case,run_id,seconds,frames,pps,attitude_hz,loss_gateway_pct,gateway_lost_estimate,gateway_bursts,gateway_burst_mean_packets,gateway_burst_max_packets,attitude_jitter_std_ms,attitude_jitter_max_ms,attitude_skipped_loss,crc_errors,offline_events,proxy_pre,proxy_dropped,proxy_loss_pct,proxy_reverse_pre,proxy_reverse_dropped,proxy_reverse_loss_pct,proxy_bursts,proxy_burst_mean_packets,proxy_burst_max_packets,delayed_frames,delay_set_mean_ms,delay_observed_mean_ms,flipped_sent,counts_ok
-K1,20261114_173604_r1,120,6170,51.417,9.183,0.0,0,0,0,0,1.640,39.884,0,0,0,,,,,,,,,,,,,,PASS
