@@ -4,6 +4,8 @@
 #include "uav_manager.h"
 #include "client_manager.h"
 #include "statistics.h"
+#include "central_link.h"
+#include "probe_handler.h"
 #include <cmath>
 #include <windows.h>
 #include <winerror.h>
@@ -22,9 +24,27 @@
 
 struct RunOptions
 {
+#if defined(GATEWAY_PROFILE_A)
+    unsigned short udpPort = 14560;
+    unsigned short tcpPort = 5760;
+    std::string scenario = "gateway_a";
+    bool centralMode = true;
+    std::string gatewayId = "A";
+#elif defined(GATEWAY_PROFILE_B)
+    unsigned short udpPort = 14561;
+    unsigned short tcpPort = 5761;
+    std::string scenario = "gateway_b";
+    bool centralMode = true;
+    std::string gatewayId = "B";
+#else
     unsigned short udpPort = Config::UDP_PORT;
     unsigned short tcpPort = Config::TCP_PORT;
     std::string scenario = "DEFAULT";
+    bool centralMode = false;
+    std::string gatewayId = "A";
+#endif
+    std::string centralIp = "127.0.0.1";
+    unsigned short centralPort = 14700;
     std::string runId;
     std::uint64_t testHoldUdpMs = 0;
     bool testSendtoInvalidAddrlenOnce = false;
@@ -54,6 +74,12 @@ static RunOptions parseOptions(int argc, char **argv)
         const std::string value(argv[i + 1]);
         if (key == "--scenario") options.scenario = safeName(value);
         else if (key == "--run-id") options.runId = safeName(value);
+        else if (key == "--gateway-id") options.gatewayId = safeName(value);
+        else if (key == "--central-ip")
+        {
+            options.centralIp = value;
+            options.centralMode = true;
+        }
         else
         {
             char *end = nullptr;
@@ -61,11 +87,22 @@ static RunOptions parseOptions(int argc, char **argv)
             const double number = std::strtod(value.c_str(), &end);
             if (errno || end == value.c_str() || *end != '\0')
                 throw std::invalid_argument("Gia tri so khong hop le: " + value);
-            if (key == "--udp-port" || key == "--tcp-port")
+            if (key == "--udp-port" || key == "--tcp-port" || key == "--central-port")
             {
                 if (!std::isfinite(number) || number < 1 || number > 65535 || number != std::floor(number)) throw std::invalid_argument("Port khong hop le: " + key);
                 if (key == "--udp-port") options.udpPort = static_cast<unsigned short>(number);
-                else options.tcpPort = static_cast<unsigned short>(number);
+                else if (key == "--tcp-port") options.tcpPort = static_cast<unsigned short>(number);
+                else
+                {
+                    options.centralPort = static_cast<unsigned short>(number);
+                    options.centralMode = true;
+                }
+            }
+            else if (key == "--central")
+            {
+                if (number != 0.0 && number != 1.0)
+                    throw std::invalid_argument("Gia tri phai la 0 hoac 1: " + value);
+                options.centralMode = number == 1.0;
             }
             else if (key == "--test-sendto-invalid-addrlen-once")
             {
@@ -127,6 +164,7 @@ private:
         const mavlink_message_t &message);
 
     void receiveUavData();
+    void receiveCentralData();
     void sendPendingUdp();
     bool udpSendReady(TimePoint now) const;
 
@@ -164,6 +202,8 @@ private:
     std::map<SourceKey, UdpSource> sources_;
     std::deque<UdpFrame> outgoingUdp_;
     bool testSendtoInjected_ = false;
+    CentralLink centralLink_;
+    ProbeHandler probeHandler_;
 };
 
 Gateway::~Gateway()
@@ -178,12 +218,33 @@ bool Gateway::openSockets()
         SOCK_DGRAM,
         options_.udpPort);
 
+    if (udp_ == INVALID_SOCKET)
+    {
+        return false;
+    }
+
+    probeHandler_.setGatewayId(options_.gatewayId);
+
+    if (options_.centralMode)
+    {
+        std::string err;
+        CentralLink::Config cfg;
+        cfg.gatewayId = options_.gatewayId;
+        cfg.centralIp = options_.centralIp;
+        cfg.centralPort = options_.centralPort;
+        if (!centralLink_.open(cfg, err))
+        {
+            std::cerr << "CentralLink loi: " << err << '\n';
+            return false;
+        }
+        return true;
+    }
+
     listener_ = Network::createBoundSocket(
         SOCK_STREAM,
         options_.tcpPort);
 
-    if (udp_ == INVALID_SOCKET ||
-        listener_ == INVALID_SOCKET)
+    if (listener_ == INVALID_SOCKET)
     {
         return false;
     }
@@ -206,8 +267,17 @@ int Gateway::run()
 
     std::cout
         << "=== PBL3 GATEWAY: HEADER MODULES ===\n"
-        << "UDP: 0.0.0.0:" << options_.udpPort << '\n'
-        << "TCP: 127.0.0.1:" << options_.tcpPort << '\n'
+        << "Gateway ID: " << options_.gatewayId << '\n'
+        << "UDP: 0.0.0.0:" << options_.udpPort << '\n';
+    if (options_.centralMode)
+    {
+        std::cout << "Central UDP: " << options_.centralIp << ":" << options_.centralPort << '\n';
+    }
+    else
+    {
+        std::cout << "TCP: 127.0.0.1:" << options_.tcpPort << '\n';
+    }
+    std::cout
         << "Dialect: development\n"
         << "Heartbeat timeout: "
         << Config::HEARTBEAT_TIMEOUT_SECONDS << " giay\n\n";
@@ -215,6 +285,10 @@ int Gateway::run()
     while (true)
     {
         maintenance();
+        if (options_.centralMode)
+        {
+            centralLink_.tick();
+        }
 
         fd_set reads;
         fd_set writes;
@@ -223,14 +297,24 @@ int Gateway::run()
         FD_ZERO(&writes);
 
         FD_SET(udp_, &reads);
-        FD_SET(listener_, &reads);
+        if (options_.centralMode && centralLink_.isOpen())
+        {
+            FD_SET(centralLink_.socket(), &reads);
+        }
+        else if (listener_ != INVALID_SOCKET)
+        {
+            FD_SET(listener_, &reads);
+        }
 
         if (udpSendReady(Clock::now()))
         {
             FD_SET(udp_, &writes);
         }
 
-        clients_.prepareSets(reads, writes);
+        if (!options_.centralMode)
+        {
+            clients_.prepareSets(reads, writes);
+        }
 
         timeval timeout{};
         timeout.tv_usec = Config::SELECT_TIMEOUT_US;
@@ -253,29 +337,39 @@ int Gateway::run()
 
         maintenance();
 
-        clients_.processReady(
-            reads,
-            writes,
-            stats_,
-            [this](
-                const Client &client,
-                const mavlink_message_t &message)
-            {
-                return routeClientFrame(client, message);
-            },
-            [this](Client &client, const std::string &line)
-            { handleText(client, line); },
-            [this](SOCKET owner)
-            {
-                purgeClientQueue(owner);
-            });
+        if (!options_.centralMode)
+        {
+            clients_.processReady(
+                reads,
+                writes,
+                stats_,
+                [this](
+                    const Client &client,
+                    const mavlink_message_t &message)
+                {
+                    return routeClientFrame(client, message);
+                },
+                [this](Client &client, const std::string &line)
+                { handleText(client, line); },
+                [this](SOCKET owner)
+                {
+                    purgeClientQueue(owner);
+                });
+        }
 
         if (FD_ISSET(udp_, &writes))
         {
             sendPendingUdp();
         }
 
-        if (FD_ISSET(listener_, &reads))
+        if (options_.centralMode)
+        {
+            if (centralLink_.isOpen() && FD_ISSET(centralLink_.socket(), &reads))
+            {
+                receiveCentralData();
+            }
+        }
+        else if (listener_ != INVALID_SOCKET && FD_ISSET(listener_, &reads))
         {
             clients_.acceptOne(listener_);
         }
@@ -896,6 +990,23 @@ void Gateway::receiveUavData()
     ++stats_.udpDatagrams;
     stats_.udpRxBytes += n;
 
+    if (probeHandler_.handleDatagram(buffer, static_cast<std::size_t>(n), sender, udp_))
+    {
+        return;
+    }
+
+    if (options_.centralMode && EnvelopeCodec::isEnvelope(buffer, static_cast<std::size_t>(n)))
+    {
+        EnvelopeCodec::Envelope env;
+        if (EnvelopeCodec::decode(buffer, static_cast<std::size_t>(n), env) &&
+            (env.type == EnvelopeCodec::MessageType::LinkReport ||
+             env.type == EnvelopeCodec::MessageType::HandoverAck))
+        {
+            centralLink_.sendEnvelope(env);
+        }
+        return;
+    }
+
     SourceKey key(
         sender.sin_addr.s_addr,
         sender.sin_port);
@@ -946,13 +1057,20 @@ void Gateway::receiveUavData()
 
         std::string packet = serialize(message);
 
-        clients_.broadcast(
-            packet,
-            stats_,
-            [this](SOCKET owner)
-            {
-                purgeClientQueue(owner);
-            });
+        if (options_.centralMode)
+        {
+            centralLink_.sendTelemetry(message.sysid, packet.data(), packet.size());
+        }
+        else
+        {
+            clients_.broadcast(
+                packet,
+                stats_,
+                [this](SOCKET owner)
+                {
+                    purgeClientQueue(owner);
+                });
+        }
 
         if (message.msgid == MAVLINK_MSG_ID_COMMAND_ACK)
         {
@@ -987,6 +1105,46 @@ void Gateway::receiveUavData()
                 << " | result="
                 << static_cast<int>(ack.result)
                 << '\n';
+        }
+    }
+}
+
+void Gateway::receiveCentralData()
+{
+    std::vector<EnvelopeCodec::Envelope> incoming;
+    centralLink_.poll(incoming);
+    for (const auto &env : incoming)
+    {
+        if (env.type == EnvelopeCodec::MessageType::CommandForward && !env.payload.empty())
+        {
+            const Uav *uav = uavs_.get(env.sysid);
+            if (!uav || outgoingUdp_.size() >= Config::MAX_UDP_PENDING)
+            {
+                continue;
+            }
+            UdpFrame frame{};
+            frame.owner = INVALID_SOCKET;
+            frame.target = env.sysid;
+            frame.generation = uav->generation;
+            frame.destination = uav->address;
+            frame.data.assign(reinterpret_cast<const char *>(env.payload.data()), env.payload.size());
+            outgoingUdp_.push_back(std::move(frame));
+        }
+        else if (env.type == EnvelopeCodec::MessageType::HandoverRequest)
+        {
+            const Uav *uav = uavs_.get(env.sysid);
+            if (!uav || outgoingUdp_.size() >= Config::MAX_UDP_PENDING)
+            {
+                continue;
+            }
+            const auto wire = EnvelopeCodec::encode(env);
+            UdpFrame frame{};
+            frame.owner = INVALID_SOCKET;
+            frame.target = env.sysid;
+            frame.generation = uav->generation;
+            frame.destination = uav->address;
+            frame.data.assign(reinterpret_cast<const char *>(wire.data()), wire.size());
+            outgoingUdp_.push_back(std::move(frame));
         }
     }
 }
