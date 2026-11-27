@@ -1,0 +1,46 @@
+{
+  "world_name": "gateway_2zones_40m",
+
+  "coordinate_frame": {
+    "name": "gazebo_world",
+    "unit": "m",
+    "x_axis": "east",
+    "y_axis": "north",
+    "z_axis": "up"
+  },
+
+  "coverage_model": {
+    "type": "hard_radius",
+    "distance_mode": "horizontal",
+    "boundary_inclusive": true
+  },
+
+  "gateways": [
+    {
+      "id": "A",
+      "antenna_position_m": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 3.6
+      },
+      "coverage_radius_m": 40.0,
+      "display": {
+        "label": "Gateway A",
+        "color": "#1687ff"
+      }
+    },
+    {
+      "id": "B",
+      "antenna_position_m": {
+        "x": 60.0,
+        "y": 0.0,
+        "z": 3.6
+      },
+      "coverage_radius_m": 40.0,
+      "display": {
+        "label": "Gateway B",
+        "color": "#ff8800"
+      }
+    }
+  ]
+}

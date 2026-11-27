@@ -1,0 +1,3589 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.9">
+  <world name="gateway_2zones_40m">
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1</real_time_factor>
+    </physics>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics" />
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands" />
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster" />
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu" />
+    <plugin filename="gz-sim-air-pressure-system" name="gz::sim::systems::AirPressure" />
+    <plugin filename="gz-sim-navsat-system" name="gz::sim::systems::NavSat" />
+    <plugin filename="gz-sim-magnetometer-system" name="gz::sim::systems::Magnetometer" />
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <gravity>0 0 -9.80665</gravity>
+    <magnetic_field>2.149e-5 0 -4.27e-5</magnetic_field>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>47.397742</latitude_deg>
+      <longitude_deg>8.545594</longitude_deg>
+      <elevation>488</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <scene>
+      <ambient>0.65 0.65 0.65 1</ambient>
+      <background>0.80 0.87 0.94 1</background>
+      <shadows>false</shadows>
+    </scene>
+    <light name="sun" type="directional">
+      <pose>0 0 100 0 0 0</pose>
+      <diffuse>0.85 0.85 0.85 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.4 0.2 -1</direction>
+      <cast_shadows>false</cast_shadows>
+    </light>
+    <model name="ground">
+      <static>true</static>
+      <pose>0 0 0 0 0 0</pose>
+      <link name="link">
+        <visual name="surface">
+          <pose>30 0 0 0 0 0</pose>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>240 160</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.30 0.36 0.30 1</ambient>
+            <diffuse>0.30 0.36 0.30 1</diffuse>
+          </material>
+        </visual>
+        <collision name="surface_collision">
+          <pose>30 0 0 0 0 0</pose>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>240 160</size>
+            </plane>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="gateway_A">
+      <static>true</static>
+      <pose>0 0 0 0 0 0</pose>
+      <link name="link">
+        <visual name="base">
+          <pose>0 0 0.2 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.4</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <collision name="base_collision">
+          <pose>0 0 0.2 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.4</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="mast">
+          <pose>0 0 1.9 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>.15</radius>
+              <length>3</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+          </material>
+        </visual>
+        <collision name="mast_collision">
+          <pose>0 0 1.9 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>.15</radius>
+              <length>3</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="antenna">
+          <pose>0 0 3.6 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>.45</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <collision name="antenna_collision">
+          <pose>0 0 3.6 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>.45</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="coverage_A_radius_40m">
+      <static>true</static>
+      <pose>0 0 0 0 0 0</pose>
+      <link name="link">
+        <visual name="arc_0">
+          <pose>40.0 0.0 0.025 0 0 1.5707963267948966</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_1">
+          <pose>39.9518182482069 1.9627069730967206 0.025 0 0 1.6198837120072371</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_2">
+          <pose>39.80738906688788 3.920685613182424 0.025 0 0 1.6689710972195777</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_3">
+          <pose>39.56706039859124 5.8692189782144695 0.025 0 0 1.718058482431918</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_4">
+          <pose>39.23141121612922 7.8036128806451295 0.025 0 0 1.7671458676442586</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_5">
+          <pose>38.801250127781756 9.719207196130554 0.025 0 0 1.8162332528565992</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_6">
+          <pose>38.27761342928835 11.611387090178493 0.025 0 0 1.8653206380689396</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_7">
+          <pose>37.66176260732083 13.475594135688802 0.025 0 0 1.9144080232812801</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_8">
+          <pose>36.95518130045147 15.307337294603592 0.025 0 0 1.9634954084936207</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_9">
+          <pose>36.159571724937734 17.102203737211283 0.025 0 0 2.012582793705961</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_10">
+          <pose>35.276850573934205 18.855869473039906 0.025 0 0 2.061670178918302</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_11">
+          <pose>34.30914440001089 20.564109767728866 0.025 0 0 2.110757564130642</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_12">
+          <pose>33.25878449210181 22.222809320784087 0.025 0 0 2.1598449493429825</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_13">
+          <pose>32.1283012592258 23.827972179697333 0.025 0 0 2.2089323345553233</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_14">
+          <pose>30.92041813450948 25.37573136654582 0.025 0 0 2.2580197197676637</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_15">
+          <pose>29.638045014198365 26.862358193880734 0.025 0 0 2.3071071049800045</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_16">
+          <pose>28.284271247461902 28.2842712474619 0.025 0 0 2.356194490192345</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_17">
+          <pose>26.862358193880734 29.638045014198365 0.025 0 0 2.405281875404685</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_18">
+          <pose>25.37573136654582 30.92041813450948 0.025 0 0 2.454369260617026</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_19">
+          <pose>23.82797217969734 32.12830125922579 0.025 0 0 2.5034566458293663</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_20">
+          <pose>22.22280932078409 33.25878449210181 0.025 0 0 2.552544031041707</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_21">
+          <pose>20.564109767728866 34.30914440001089 0.025 0 0 2.6016314162540475</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_22">
+          <pose>18.855869473039913 35.2768505739342 0.025 0 0 2.650718801466388</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_23">
+          <pose>17.102203737211287 36.159571724937734 0.025 0 0 2.699806186678728</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_24">
+          <pose>15.307337294603593 36.95518130045147 0.025 0 0 2.748893571891069</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_25">
+          <pose>13.475594135688802 37.66176260732083 0.025 0 0 2.7979809571034098</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_26">
+          <pose>11.611387090178493 38.27761342928836 0.025 0 0 2.84706834231575</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_27">
+          <pose>9.71920719613056 38.801250127781756 0.025 0 0 2.8961557275280905</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_28">
+          <pose>7.803612880645133 39.23141121612922 0.025 0 0 2.945243112740431</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_29">
+          <pose>5.8692189782144695 39.56706039859124 0.025 0 0 2.9943304979527716</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_30">
+          <pose>3.920685613182431 39.80738906688787 0.025 0 0 3.043417883165112</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_31">
+          <pose>1.962706973096725 39.9518182482069 0.025 0 0 3.0925052683774528</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_32">
+          <pose>2.4492935982947065e-15 40.0 0.025 0 0 3.141592653589793</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_33">
+          <pose>-1.9627069730967204 39.9518182482069 0.025 0 0 3.1906800388021335</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_34">
+          <pose>-3.920685613182426 39.80738906688788 0.025 0 0 3.2397674240144743</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_35">
+          <pose>-5.869218978214466 39.56706039859124 0.025 0 0 3.2888548092268146</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_36">
+          <pose>-7.803612880645128 39.23141121612922 0.025 0 0 3.3379421944391554</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_37">
+          <pose>-9.719207196130554 38.801250127781756 0.025 0 0 3.3870295796514958</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_38">
+          <pose>-11.611387090178486 38.27761342928836 0.025 0 0 3.436116964863836</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_39">
+          <pose>-13.475594135688798 37.66176260732083 0.025 0 0 3.4852043500761765</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_40">
+          <pose>-15.307337294603588 36.95518130045147 0.025 0 0 3.5342917352885173</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_41">
+          <pose>-17.102203737211276 36.159571724937734 0.025 0 0 3.5833791205008576</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_42">
+          <pose>-18.85586947303991 35.276850573934205 0.025 0 0 3.6324665057131984</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_43">
+          <pose>-20.564109767728866 34.30914440001089 0.025 0 0 3.6815538909255388</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_44">
+          <pose>-22.22280932078408 33.25878449210182 0.025 0 0 3.730641276137879</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_45">
+          <pose>-23.827972179697333 32.1283012592258 0.025 0 0 3.77972866135022</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_46">
+          <pose>-25.375731366545814 30.920418134509482 0.025 0 0 3.8288160465625602</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_47">
+          <pose>-26.862358193880738 29.63804501419836 0.025 0 0 3.877903431774901</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_48">
+          <pose>-28.2842712474619 28.284271247461902 0.025 0 0 3.9269908169872414</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_49">
+          <pose>-29.638045014198354 26.86235819388074 0.025 0 0 3.9760782021995817</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_50">
+          <pose>-30.92041813450948 25.37573136654582 0.025 0 0 4.025165587411923</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_51">
+          <pose>-32.12830125922579 23.82797217969734 0.025 0 0 4.074252972624263</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_52">
+          <pose>-33.25878449210181 22.222809320784087 0.025 0 0 4.123340357836604</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_53">
+          <pose>-34.30914440001088 20.564109767728873 0.025 0 0 4.172427743048944</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_54">
+          <pose>-35.2768505739342 18.855869473039913 0.025 0 0 4.221515128261284</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_55">
+          <pose>-36.159571724937734 17.10220373721128 0.025 0 0 4.270602513473625</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_56">
+          <pose>-36.95518130045147 15.307337294603595 0.025 0 0 4.319689898685965</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_57">
+          <pose>-37.661762607320824 13.475594135688812 0.025 0 0 4.368777283898305</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_58">
+          <pose>-38.27761342928835 11.611387090178496 0.025 0 0 4.417864669110647</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_59">
+          <pose>-38.801250127781756 9.719207196130563 0.025 0 0 4.466952054322987</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_60">
+          <pose>-39.23141121612922 7.803612880645145 0.025 0 0 4.516039439535327</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_61">
+          <pose>-39.56706039859124 5.869218978214472 0.025 0 0 4.565126824747669</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_62">
+          <pose>-39.80738906688787 3.920685613182433 0.025 0 0 4.614214209960009</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_63">
+          <pose>-39.9518182482069 1.9627069730967186 0.025 0 0 4.663301595172349</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_64">
+          <pose>-40.0 4.898587196589413e-15 0.025 0 0 4.71238898038469</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_65">
+          <pose>-39.9518182482069 -1.9627069730967088 0.025 0 0 4.76147636559703</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_66">
+          <pose>-39.80738906688788 -3.9206856131824237 0.025 0 0 4.81056375080937</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_67">
+          <pose>-39.56706039859124 -5.869218978214463 0.025 0 0 4.859651136021711</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_68">
+          <pose>-39.23141121612922 -7.803612880645135 0.025 0 0 4.908738521234052</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_69">
+          <pose>-38.801250127781756 -9.719207196130553 0.025 0 0 4.957825906446392</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_70">
+          <pose>-38.27761342928836 -11.611387090178484 0.025 0 0 5.006913291658733</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_71">
+          <pose>-37.66176260732083 -13.475594135688805 0.025 0 0 5.056000676871074</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_72">
+          <pose>-36.95518130045147 -15.307337294603586 0.025 0 0 5.105088062083414</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_73">
+          <pose>-36.159571724937734 -17.102203737211273 0.025 0 0 5.154175447295755</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_74">
+          <pose>-35.276850573934205 -18.855869473039906 0.025 0 0 5.203262832508095</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_75">
+          <pose>-34.30914440001089 -20.564109767728862 0.025 0 0 5.252350217720435</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_76">
+          <pose>-33.25878449210182 -22.22280932078408 0.025 0 0 5.301437602932776</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_77">
+          <pose>-32.1283012592258 -23.82797217969733 0.025 0 0 5.350524988145116</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_78">
+          <pose>-30.920418134509482 -25.37573136654581 0.025 0 0 5.399612373357456</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_79">
+          <pose>-29.638045014198365 -26.862358193880738 0.025 0 0 5.448699758569798</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_80">
+          <pose>-28.28427124746191 -28.2842712474619 0.025 0 0 5.497787143782138</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_81">
+          <pose>-26.862358193880745 -29.638045014198354 0.025 0 0 5.546874528994478</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_82">
+          <pose>-25.375731366545835 -30.920418134509468 0.025 0 0 5.595961914206819</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_83">
+          <pose>-23.827972179697326 -32.1283012592258 0.025 0 0 5.64504929941916</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_84">
+          <pose>-22.222809320784087 -33.25878449210181 0.025 0 0 5.6941366846315</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_85">
+          <pose>-20.564109767728873 -34.30914440001088 0.025 0 0 5.743224069843841</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_86">
+          <pose>-18.855869473039913 -35.2768505739342 0.025 0 0 5.792311455056181</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_87">
+          <pose>-17.102203737211298 -36.15957172493773 0.025 0 0 5.841398840268521</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_88">
+          <pose>-15.307337294603613 -36.95518130045146 0.025 0 0 5.890486225480862</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_89">
+          <pose>-13.475594135688798 -37.66176260732083 0.025 0 0 5.939573610693203</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_90">
+          <pose>-11.611387090178498 -38.27761342928835 0.025 0 0 5.988660995905543</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_91">
+          <pose>-9.719207196130565 -38.801250127781756 0.025 0 0 6.037748381117884</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_92">
+          <pose>-7.803612880645146 -39.23141121612921 0.025 0 0 6.086835766330224</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_93">
+          <pose>-5.869218978214493 -39.56706039859124 0.025 0 0 6.135923151542564</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_94">
+          <pose>-3.920685613182418 -39.80738906688788 0.025 0 0 6.1850105367549055</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_95">
+          <pose>-1.9627069730967213 -39.9518182482069 0.025 0 0 6.234097921967246</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_96">
+          <pose>-7.347880794884118e-15 -40.0 0.025 0 0 6.283185307179586</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_97">
+          <pose>1.9627069730967064 -39.9518182482069 0.025 0 0 6.332272692391927</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_98">
+          <pose>3.9206856131824037 -39.80738906688788 0.025 0 0 6.381360077604267</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_99">
+          <pose>5.8692189782144775 -39.56706039859124 0.025 0 0 6.430447462816608</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_100">
+          <pose>7.803612880645132 -39.23141121612922 0.025 0 0 6.4795348480289485</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_101">
+          <pose>9.71920719613055 -38.801250127781756 0.025 0 0 6.528622233241289</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_102">
+          <pose>11.611387090178482 -38.27761342928836 0.025 0 0 6.577709618453629</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_103">
+          <pose>13.475594135688784 -37.66176260732084 0.025 0 0 6.62679700366597</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_104">
+          <pose>15.3073372946036 -36.955181300451464 0.025 0 0 6.675884388878311</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_105">
+          <pose>17.102203737211287 -36.159571724937734 0.025 0 0 6.724971774090651</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_106">
+          <pose>18.855869473039903 -35.276850573934205 0.025 0 0 6.7740591593029915</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_107">
+          <pose>20.564109767728862 -34.30914440001089 0.025 0 0 6.823146544515332</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_108">
+          <pose>22.222809320784073 -33.25878449210182 0.025 0 0 6.872233929727672</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_109">
+          <pose>23.827972179697316 -32.12830125922581 0.025 0 0 6.921321314940013</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_110">
+          <pose>25.375731366545825 -30.920418134509475 0.025 0 0 6.970408700152354</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_111">
+          <pose>26.862358193880734 -29.638045014198365 0.025 0 0 7.019496085364694</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_112">
+          <pose>28.284271247461895 -28.28427124746191 0.025 0 0 7.0685834705770345</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_113">
+          <pose>29.638045014198354 -26.862358193880745 0.025 0 0 7.117670855789375</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_114">
+          <pose>30.920418134509468 -25.375731366545835 0.025 0 0 7.166758241001715</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_115">
+          <pose>32.1283012592258 -23.82797217969733 0.025 0 0 7.2158456262140565</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_116">
+          <pose>33.25878449210181 -22.222809320784087 0.025 0 0 7.264933011426397</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_117">
+          <pose>34.30914440001088 -20.564109767728876 0.025 0 0 7.314020396638737</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_118">
+          <pose>35.27685057393419 -18.855869473039917 0.025 0 0 7.3631077818510775</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_119">
+          <pose>36.15957172493773 -17.1022037372113 0.025 0 0 7.412195167063418</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_120">
+          <pose>36.95518130045146 -15.307337294603617 0.025 0 0 7.461282552275758</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_121">
+          <pose>37.66176260732083 -13.4755941356888 0.025 0 0 7.5103699374880994</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_122">
+          <pose>38.27761342928835 -11.6113870901785 0.025 0 0 7.55945732270044</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_123">
+          <pose>38.801250127781756 -9.719207196130567 0.025 0 0 7.60854470791278</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_124">
+          <pose>39.23141121612921 -7.803612880645149 0.025 0 0 7.6576320931251205</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_125">
+          <pose>39.56706039859124 -5.869218978214495 0.025 0 0 7.706719478337461</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_126">
+          <pose>39.80738906688788 -3.92068561318242 0.025 0 0 7.755806863549802</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_127">
+          <pose>39.9518182482069 -1.9627069730967237 0.025 0 0 7.804894248762142</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 1 1</ambient>
+            <diffuse>0.05 0.45 1 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="gateway_B">
+      <static>true</static>
+      <pose>60 0 0 0 0 0</pose>
+      <link name="link">
+        <visual name="base">
+          <pose>0 0 0.2 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.4</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <collision name="base_collision">
+          <pose>0 0 0.2 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2 2 0.4</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="mast">
+          <pose>0 0 1.9 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>.15</radius>
+              <length>3</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+          </material>
+        </visual>
+        <collision name="mast_collision">
+          <pose>0 0 1.9 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>.15</radius>
+              <length>3</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="antenna">
+          <pose>0 0 3.6 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>.45</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <collision name="antenna_collision">
+          <pose>0 0 3.6 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>.45</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="coverage_B_radius_40m">
+      <static>true</static>
+      <pose>60 0 0 0 0 0</pose>
+      <link name="link">
+        <visual name="arc_0">
+          <pose>40.0 0.0 0.025 0 0 1.5707963267948966</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_1">
+          <pose>39.9518182482069 1.9627069730967206 0.025 0 0 1.6198837120072371</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_2">
+          <pose>39.80738906688788 3.920685613182424 0.025 0 0 1.6689710972195777</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_3">
+          <pose>39.56706039859124 5.8692189782144695 0.025 0 0 1.718058482431918</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_4">
+          <pose>39.23141121612922 7.8036128806451295 0.025 0 0 1.7671458676442586</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_5">
+          <pose>38.801250127781756 9.719207196130554 0.025 0 0 1.8162332528565992</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_6">
+          <pose>38.27761342928835 11.611387090178493 0.025 0 0 1.8653206380689396</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_7">
+          <pose>37.66176260732083 13.475594135688802 0.025 0 0 1.9144080232812801</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_8">
+          <pose>36.95518130045147 15.307337294603592 0.025 0 0 1.9634954084936207</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_9">
+          <pose>36.159571724937734 17.102203737211283 0.025 0 0 2.012582793705961</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_10">
+          <pose>35.276850573934205 18.855869473039906 0.025 0 0 2.061670178918302</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_11">
+          <pose>34.30914440001089 20.564109767728866 0.025 0 0 2.110757564130642</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_12">
+          <pose>33.25878449210181 22.222809320784087 0.025 0 0 2.1598449493429825</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_13">
+          <pose>32.1283012592258 23.827972179697333 0.025 0 0 2.2089323345553233</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_14">
+          <pose>30.92041813450948 25.37573136654582 0.025 0 0 2.2580197197676637</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_15">
+          <pose>29.638045014198365 26.862358193880734 0.025 0 0 2.3071071049800045</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_16">
+          <pose>28.284271247461902 28.2842712474619 0.025 0 0 2.356194490192345</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_17">
+          <pose>26.862358193880734 29.638045014198365 0.025 0 0 2.405281875404685</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_18">
+          <pose>25.37573136654582 30.92041813450948 0.025 0 0 2.454369260617026</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_19">
+          <pose>23.82797217969734 32.12830125922579 0.025 0 0 2.5034566458293663</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_20">
+          <pose>22.22280932078409 33.25878449210181 0.025 0 0 2.552544031041707</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_21">
+          <pose>20.564109767728866 34.30914440001089 0.025 0 0 2.6016314162540475</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_22">
+          <pose>18.855869473039913 35.2768505739342 0.025 0 0 2.650718801466388</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_23">
+          <pose>17.102203737211287 36.159571724937734 0.025 0 0 2.699806186678728</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_24">
+          <pose>15.307337294603593 36.95518130045147 0.025 0 0 2.748893571891069</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_25">
+          <pose>13.475594135688802 37.66176260732083 0.025 0 0 2.7979809571034098</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_26">
+          <pose>11.611387090178493 38.27761342928836 0.025 0 0 2.84706834231575</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_27">
+          <pose>9.71920719613056 38.801250127781756 0.025 0 0 2.8961557275280905</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_28">
+          <pose>7.803612880645133 39.23141121612922 0.025 0 0 2.945243112740431</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_29">
+          <pose>5.8692189782144695 39.56706039859124 0.025 0 0 2.9943304979527716</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_30">
+          <pose>3.920685613182431 39.80738906688787 0.025 0 0 3.043417883165112</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_31">
+          <pose>1.962706973096725 39.9518182482069 0.025 0 0 3.0925052683774528</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_32">
+          <pose>2.4492935982947065e-15 40.0 0.025 0 0 3.141592653589793</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_33">
+          <pose>-1.9627069730967204 39.9518182482069 0.025 0 0 3.1906800388021335</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_34">
+          <pose>-3.920685613182426 39.80738906688788 0.025 0 0 3.2397674240144743</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_35">
+          <pose>-5.869218978214466 39.56706039859124 0.025 0 0 3.2888548092268146</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_36">
+          <pose>-7.803612880645128 39.23141121612922 0.025 0 0 3.3379421944391554</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_37">
+          <pose>-9.719207196130554 38.801250127781756 0.025 0 0 3.3870295796514958</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_38">
+          <pose>-11.611387090178486 38.27761342928836 0.025 0 0 3.436116964863836</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_39">
+          <pose>-13.475594135688798 37.66176260732083 0.025 0 0 3.4852043500761765</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_40">
+          <pose>-15.307337294603588 36.95518130045147 0.025 0 0 3.5342917352885173</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_41">
+          <pose>-17.102203737211276 36.159571724937734 0.025 0 0 3.5833791205008576</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_42">
+          <pose>-18.85586947303991 35.276850573934205 0.025 0 0 3.6324665057131984</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_43">
+          <pose>-20.564109767728866 34.30914440001089 0.025 0 0 3.6815538909255388</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_44">
+          <pose>-22.22280932078408 33.25878449210182 0.025 0 0 3.730641276137879</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_45">
+          <pose>-23.827972179697333 32.1283012592258 0.025 0 0 3.77972866135022</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_46">
+          <pose>-25.375731366545814 30.920418134509482 0.025 0 0 3.8288160465625602</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_47">
+          <pose>-26.862358193880738 29.63804501419836 0.025 0 0 3.877903431774901</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_48">
+          <pose>-28.2842712474619 28.284271247461902 0.025 0 0 3.9269908169872414</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_49">
+          <pose>-29.638045014198354 26.86235819388074 0.025 0 0 3.9760782021995817</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_50">
+          <pose>-30.92041813450948 25.37573136654582 0.025 0 0 4.025165587411923</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_51">
+          <pose>-32.12830125922579 23.82797217969734 0.025 0 0 4.074252972624263</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_52">
+          <pose>-33.25878449210181 22.222809320784087 0.025 0 0 4.123340357836604</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_53">
+          <pose>-34.30914440001088 20.564109767728873 0.025 0 0 4.172427743048944</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_54">
+          <pose>-35.2768505739342 18.855869473039913 0.025 0 0 4.221515128261284</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_55">
+          <pose>-36.159571724937734 17.10220373721128 0.025 0 0 4.270602513473625</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_56">
+          <pose>-36.95518130045147 15.307337294603595 0.025 0 0 4.319689898685965</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_57">
+          <pose>-37.661762607320824 13.475594135688812 0.025 0 0 4.368777283898305</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_58">
+          <pose>-38.27761342928835 11.611387090178496 0.025 0 0 4.417864669110647</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_59">
+          <pose>-38.801250127781756 9.719207196130563 0.025 0 0 4.466952054322987</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_60">
+          <pose>-39.23141121612922 7.803612880645145 0.025 0 0 4.516039439535327</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_61">
+          <pose>-39.56706039859124 5.869218978214472 0.025 0 0 4.565126824747669</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_62">
+          <pose>-39.80738906688787 3.920685613182433 0.025 0 0 4.614214209960009</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_63">
+          <pose>-39.9518182482069 1.9627069730967186 0.025 0 0 4.663301595172349</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_64">
+          <pose>-40.0 4.898587196589413e-15 0.025 0 0 4.71238898038469</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_65">
+          <pose>-39.9518182482069 -1.9627069730967088 0.025 0 0 4.76147636559703</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_66">
+          <pose>-39.80738906688788 -3.9206856131824237 0.025 0 0 4.81056375080937</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_67">
+          <pose>-39.56706039859124 -5.869218978214463 0.025 0 0 4.859651136021711</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_68">
+          <pose>-39.23141121612922 -7.803612880645135 0.025 0 0 4.908738521234052</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_69">
+          <pose>-38.801250127781756 -9.719207196130553 0.025 0 0 4.957825906446392</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_70">
+          <pose>-38.27761342928836 -11.611387090178484 0.025 0 0 5.006913291658733</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_71">
+          <pose>-37.66176260732083 -13.475594135688805 0.025 0 0 5.056000676871074</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_72">
+          <pose>-36.95518130045147 -15.307337294603586 0.025 0 0 5.105088062083414</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_73">
+          <pose>-36.159571724937734 -17.102203737211273 0.025 0 0 5.154175447295755</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_74">
+          <pose>-35.276850573934205 -18.855869473039906 0.025 0 0 5.203262832508095</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_75">
+          <pose>-34.30914440001089 -20.564109767728862 0.025 0 0 5.252350217720435</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_76">
+          <pose>-33.25878449210182 -22.22280932078408 0.025 0 0 5.301437602932776</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_77">
+          <pose>-32.1283012592258 -23.82797217969733 0.025 0 0 5.350524988145116</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_78">
+          <pose>-30.920418134509482 -25.37573136654581 0.025 0 0 5.399612373357456</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_79">
+          <pose>-29.638045014198365 -26.862358193880738 0.025 0 0 5.448699758569798</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_80">
+          <pose>-28.28427124746191 -28.2842712474619 0.025 0 0 5.497787143782138</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_81">
+          <pose>-26.862358193880745 -29.638045014198354 0.025 0 0 5.546874528994478</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_82">
+          <pose>-25.375731366545835 -30.920418134509468 0.025 0 0 5.595961914206819</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_83">
+          <pose>-23.827972179697326 -32.1283012592258 0.025 0 0 5.64504929941916</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_84">
+          <pose>-22.222809320784087 -33.25878449210181 0.025 0 0 5.6941366846315</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_85">
+          <pose>-20.564109767728873 -34.30914440001088 0.025 0 0 5.743224069843841</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_86">
+          <pose>-18.855869473039913 -35.2768505739342 0.025 0 0 5.792311455056181</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_87">
+          <pose>-17.102203737211298 -36.15957172493773 0.025 0 0 5.841398840268521</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_88">
+          <pose>-15.307337294603613 -36.95518130045146 0.025 0 0 5.890486225480862</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_89">
+          <pose>-13.475594135688798 -37.66176260732083 0.025 0 0 5.939573610693203</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_90">
+          <pose>-11.611387090178498 -38.27761342928835 0.025 0 0 5.988660995905543</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_91">
+          <pose>-9.719207196130565 -38.801250127781756 0.025 0 0 6.037748381117884</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_92">
+          <pose>-7.803612880645146 -39.23141121612921 0.025 0 0 6.086835766330224</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_93">
+          <pose>-5.869218978214493 -39.56706039859124 0.025 0 0 6.135923151542564</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_94">
+          <pose>-3.920685613182418 -39.80738906688788 0.025 0 0 6.1850105367549055</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_95">
+          <pose>-1.9627069730967213 -39.9518182482069 0.025 0 0 6.234097921967246</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_96">
+          <pose>-7.347880794884118e-15 -40.0 0.025 0 0 6.283185307179586</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_97">
+          <pose>1.9627069730967064 -39.9518182482069 0.025 0 0 6.332272692391927</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_98">
+          <pose>3.9206856131824037 -39.80738906688788 0.025 0 0 6.381360077604267</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_99">
+          <pose>5.8692189782144775 -39.56706039859124 0.025 0 0 6.430447462816608</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_100">
+          <pose>7.803612880645132 -39.23141121612922 0.025 0 0 6.4795348480289485</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_101">
+          <pose>9.71920719613055 -38.801250127781756 0.025 0 0 6.528622233241289</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_102">
+          <pose>11.611387090178482 -38.27761342928836 0.025 0 0 6.577709618453629</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_103">
+          <pose>13.475594135688784 -37.66176260732084 0.025 0 0 6.62679700366597</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_104">
+          <pose>15.3073372946036 -36.955181300451464 0.025 0 0 6.675884388878311</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_105">
+          <pose>17.102203737211287 -36.159571724937734 0.025 0 0 6.724971774090651</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_106">
+          <pose>18.855869473039903 -35.276850573934205 0.025 0 0 6.7740591593029915</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_107">
+          <pose>20.564109767728862 -34.30914440001089 0.025 0 0 6.823146544515332</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_108">
+          <pose>22.222809320784073 -33.25878449210182 0.025 0 0 6.872233929727672</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_109">
+          <pose>23.827972179697316 -32.12830125922581 0.025 0 0 6.921321314940013</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_110">
+          <pose>25.375731366545825 -30.920418134509475 0.025 0 0 6.970408700152354</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_111">
+          <pose>26.862358193880734 -29.638045014198365 0.025 0 0 7.019496085364694</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_112">
+          <pose>28.284271247461895 -28.28427124746191 0.025 0 0 7.0685834705770345</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_113">
+          <pose>29.638045014198354 -26.862358193880745 0.025 0 0 7.117670855789375</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_114">
+          <pose>30.920418134509468 -25.375731366545835 0.025 0 0 7.166758241001715</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_115">
+          <pose>32.1283012592258 -23.82797217969733 0.025 0 0 7.2158456262140565</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_116">
+          <pose>33.25878449210181 -22.222809320784087 0.025 0 0 7.264933011426397</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_117">
+          <pose>34.30914440001088 -20.564109767728876 0.025 0 0 7.314020396638737</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_118">
+          <pose>35.27685057393419 -18.855869473039917 0.025 0 0 7.3631077818510775</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_119">
+          <pose>36.15957172493773 -17.1022037372113 0.025 0 0 7.412195167063418</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_120">
+          <pose>36.95518130045146 -15.307337294603617 0.025 0 0 7.461282552275758</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_121">
+          <pose>37.66176260732083 -13.4755941356888 0.025 0 0 7.5103699374880994</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_122">
+          <pose>38.27761342928835 -11.6113870901785 0.025 0 0 7.55945732270044</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_123">
+          <pose>38.801250127781756 -9.719207196130567 0.025 0 0 7.60854470791278</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_124">
+          <pose>39.23141121612921 -7.803612880645149 0.025 0 0 7.6576320931251205</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_125">
+          <pose>39.56706039859124 -5.869218978214495 0.025 0 0 7.706719478337461</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_126">
+          <pose>39.80738906688788 -3.92068561318242 0.025 0 0 7.755806863549802</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+        <visual name="arc_127">
+          <pose>39.9518182482069 -1.9627069730967237 0.025 0 0 7.804894248762142</pose>
+          <geometry>
+            <box>
+              <size>1.9732982818329832 0.20 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.45 0.05 1</ambient>
+            <diffuse>1 0.45 0.05 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="survey_path_y_minus_10">
+      <static>true</static>
+      <pose>0 0 0 0 0 0</pose>
+      <link name="link">
+        <visual name="dash_0">
+          <pose>-10 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_5">
+          <pose>-5 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_10">
+          <pose>0 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_15">
+          <pose>5 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_20">
+          <pose>10 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_25">
+          <pose>15 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_30">
+          <pose>20 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_35">
+          <pose>25 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_40">
+          <pose>30 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_45">
+          <pose>35 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_50">
+          <pose>40 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_55">
+          <pose>45 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_60">
+          <pose>50 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_65">
+          <pose>55 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_70">
+          <pose>60 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_75">
+          <pose>65 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_80">
+          <pose>70 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_85">
+          <pose>75 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_90">
+          <pose>80 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_95">
+          <pose>85 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_100">
+          <pose>90 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_105">
+          <pose>95 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dash_110">
+          <pose>100 -10 .04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 .15 .012</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="start_pad">
+      <static>true</static>
+      <pose>0 -10 0 0 0 0</pose>
+      <link name="link">
+        <visual name="pad">
+          <pose>0 0 .025 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3 3 .02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.9 0.9 0.9 1</ambient>
+            <diffuse>0.9 0.9 0.9 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>

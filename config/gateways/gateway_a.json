@@ -1,0 +1,33 @@
+{
+  "gateway_id": "A",
+
+  "proxy_transport": {
+    "protocol": "udp",
+    "listen_address": "0.0.0.0",
+    "listen_port": 14560,
+    "learn_remote_endpoint": true,
+    "uav_timeout_ms": 3000
+  },
+
+  "central": {
+    "protocol": "udp",
+    "address": "127.0.0.1",
+    "port": 14700,
+    "heartbeat_interval_ms": 1000,
+    "timeout_ms": 3000
+  },
+
+  "probe": {
+    "enabled": true
+  },
+
+  "mavlink": {
+    "validate_crc": true,
+    "preserve_frame_bytes": true
+  },
+
+  "logging": {
+    "level": "info",
+    "directory": "../../logs/gateway_a"
+  }
+}

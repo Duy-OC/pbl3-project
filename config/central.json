@@ -1,0 +1,67 @@
+{
+  "central_id": "central_1",
+
+  "gateway_transport": {
+    "protocol": "udp",
+    "listen_address": "0.0.0.0",
+    "listen_port": 14700,
+    "gateway_timeout_ms": 3000,
+    "allowed_gateway_ids": ["A", "B"]
+  },
+
+  "clients": {
+    "protocol": "tcp",
+    "listen_address": "0.0.0.0",
+    "listen_port": 5760,
+    "max_clients": 10,
+    "max_queue_bytes_per_client": 1048576,
+    "slow_client_policy": "disconnect"
+  },
+
+  "routing": {
+    "uav_timeout_ms": 3000,
+    "require_confirmed_route": true,
+    "drop_when_no_route": true
+  },
+
+  "control_policy": {
+    "mode": "single_controller",
+    "default_role": "observer",
+    "controller_selection": "first_eligible_client",
+    "controller_disconnect_policy": "release",
+    "allow_observer_read_requests": true
+  },
+
+  "handover": {
+    "mode": "manual",
+    "initial_gateway": "A",
+    "automatic": {
+      "selection_policy": "rssi_with_quality_guard",
+      "rssi_hysteresis_db": 5.0,
+      "max_candidate_rtt_ms": 150,
+      "max_candidate_probe_loss_ratio": 0.2,
+      "time_to_trigger_ms": 1000,
+      "minimum_hold_ms": 3000
+    },
+    "failure_detection": {
+      "consecutive_probe_timeouts": 3,
+      "metrics_stale_timeout_ms": 1500
+    },
+    "switch_transaction": {
+      "ack_timeout_ms": 1000,
+      "max_attempts": 3
+    }
+  },
+
+  "mavlink_transactions": {
+    "owner": "client",
+    "retry_in_central": false,
+    "tracking_timeout_ms": 5000
+  },
+
+  "logging": {
+    "level": "info",
+    "directory": "../logs/central",
+    "record_handover_events": true
+  }
+}

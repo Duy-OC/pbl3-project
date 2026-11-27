@@ -1,0 +1,68 @@
+{
+  "proxy_id": "proxy_uav_1",
+  "px4": {
+    "listen_address": "0.0.0.0",
+    "listen_port": 14600,
+    "learn_remote_endpoint": true,
+    "expected_sysid": 1
+  },
+  "gateways": [
+    {
+      "id": "A",
+      "address": "127.0.0.1",
+      "port": 14560
+    },
+    {
+      "id": "B",
+      "address": "127.0.0.1",
+      "port": 14561
+    }
+  ],
+  "position": {
+    "message": "LOCAL_POSITION_NED",
+    "stale_timeout_ms": 1000,
+    "invalid_position_policy": "block_gateway_links",
+    "transform": {
+      "type": "configured_ned_to_world",
+      "world_origin_of_ned_m": [
+        -0.0017770000000000008,
+        -10.0271,
+        -0.044
+      ],
+      "world_yaw_of_ned_rad": 1.5707963267948966,
+      "altitude_offset_m": 0
+    }
+  },
+  "coverage": {
+    "enabled": true,
+    "zones_file": "zones.json",
+    "distance_mode": "horizontal",
+    "block_both_directions": true,
+    "apply_to_probes": true
+  },
+  "rssi": {
+    "enabled": true,
+    "model": "log_distance",
+    "reference_distance_m": 1.0,
+    "reference_rssi_dbm": -40.0,
+    "path_loss_exponent": 2.0,
+    "shadowing_stddev_db": 0.0,
+    "random_seed": 1
+  },
+  "probe": {
+    "enabled": true,
+    "interval_ms": 100,
+    "timeout_ms": 500,
+    "statistics_window_ms": 2000
+  },
+  "handover": {
+    "mode": "rssi",
+    "initial_gateway": "A",
+    "decision_owner": "central",
+    "central_unreachable_policy": "keep_current_if_available"
+  },
+  "logging": {
+    "level": "info",
+    "directory": "../logs/proxy"
+  }
+}
